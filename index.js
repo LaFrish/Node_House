@@ -92,8 +92,12 @@ app.post("/mixologist/:drink_name/delete", function(req, res){
   });
 });
 
-app.post("/mixologist:drink_name", function(req, res){
+
+
+app.post("/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
+    console.log("body", req.body)
+    console.log("results", mixologist) 
     res.redirect("/mixologist/" + mixologist.drink_name);
   });
 });

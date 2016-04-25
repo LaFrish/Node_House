@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Beach House</title>
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <script src="/assets/css/styles.css"> </script>
-  </head>
-  <body>
+    <script src="/assets/css/styles.css">
+    </script>
+</head>
+
+<body>
     <nav>
-  {{#if user}}
-  <img src="{{user.t_photo_url}}" alt="{{user.name}}" />
-  Welcome, {{user.name}}!
-  <a href="/logout">Sign out</a>
-  {{else}}
-  <a href="/login/twitter">Sign in</a>
-  {{/if}}
-</nav>
+        {{#if user}}
+            <img src="{{user.t_photo_url}}" alt="{{user.name}}" /> Welcome, {{user.name}}!
+            <a href="/logout">Sign out</a>
+        {{else}}
+            <a href="/login/twitter">Sign in</a>
+        {{/if}}
+    </nav>
     <h1><a href="/"> Beach House</a></h1>
 
-    <h1><a href="/mixologist">Personal Mixologist</a></h1>
+    <h1><a href="/mixologist">Personal Mixologist</a></h1> {{{body}}}
+</body>
 
-    {{{body}}}
-  </body>
 </html>

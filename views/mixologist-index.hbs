@@ -2,16 +2,14 @@
 
 <h2>{{mixologists.length}} cocktails</h2>
 {{#each mixologists as |mixologist index|}}
-<h3>
-  <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe
-  </a></h3>
-  {{/each}}
-
-
+  <h3>
+    <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe</a>
+  </h3>
+{{/each}}
 
 <form action="/mixologist" method="post">
-  <input type="text" name="mixologist[drink_name]" placeholder="Name" />
-  <input type="string" name="mixologist[ingredients]" placeholder="Ingredients" />
-  <input type="text" name="mixologist[instructions]" placeholder="Instructions" />
-  <button type="submit">Add your recipe</button>
+    <input type="text" name="mixologist[drink_name]" placeholder="Name" />
+    <input type="string" name="mixologist[ingredients]" placeholder="Ingredients" />
+    <input type="text" name="mixologist[instructions]" placeholder="Instructions" />
+    <button type="submit">Add your recipe</button>
 </form>
