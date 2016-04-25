@@ -18,7 +18,13 @@
   "homepage": "https://github.com/LaFrish/beachhouse#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "connect-mongo": "^1.1.0",
     "express-handlebars": "^3.0.0",
-    "mongoose": "^4.4.13"
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.13",
+    "qs": "^6.1.0",
+    "querystring": "^0.2.0",
+    "request": "^2.72.0",
+    "sessions": "0.0.2-7"
   }
 }
