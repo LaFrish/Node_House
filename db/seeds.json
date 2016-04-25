@@ -1,10 +1,19 @@
 [
   {
     "drink_name": "Moscow Mule",
-    "ingredients": "Vodka"
+    "ingredients": [
+      "Vodka",
+      "Lime Juice",
+      "Ginger Beer"
+    ],
+      "instructions": "Mix all together"
   },
   {
     "drink_name": "Holy Water",
-    "ingredients": "Vodka"
+    "ingredients": [
+      "Vodka"
+      "Lemons"
+    ],
+    "instructions": "Mix all together"
   }
 ]

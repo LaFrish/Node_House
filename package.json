@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/LaFrish/beachhouse#readme",
   "dependencies": {
-    "express-handlebars": "^3.0.0"
+    "body-parser": "^1.15.0",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.4.13"
   }
 }

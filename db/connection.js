@@ -1,5 +1,14 @@
-var seedData = require("./seeds.json");
+var mongoose = require("mongoose");
 
-module.exports = {
-mixologists: seedData
-  };
+var MixologistSchema = new mongoose.Schema(
+  {
+    drink_name: String,
+    ingredients: [String],
+    instructions: String
+  }
+);
+
+mongoose.model("Mixologist", MixologistSchema);
+mongoose.connect("mongodb://localhost/mixologist");
+
+module.exports = mongoose;

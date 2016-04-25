@@ -1,8 +1,11 @@
 var express = require("express");
-var hbs = require("express-handlebars");
-var db = require("./db/connection");
+var parser  = require("body-parser");
+var hbs     = require("express-handlebars");
+var mongoose= require("./db/connection");
 
-var app = express();
+var app     = express();
+
+var Mixologist = mongoose.model("Mixologist");
 
 app.set("port", process.env.PORT || 3001);
 app.set("view engine", "hbs");
@@ -12,29 +15,44 @@ app.engine(".hbs", hbs({
   layoutsDir:     "views/",
   defaultLayout:  "layout-main"
 }));
-
 app.use("/assets", express.static("public"));
+app.use(parser.urlencoded({extended: true}));
 
 app.get("/", function(req, res){
   res.render("welcome");
 });
 
 app.get("/mixologist", function(req, res){
-  res.render("mixologist-index", {
-    mixologists: db.mixologists
+  Mixologist.find({}).then(function(mixologists){
+    res.render("mixologist-index", {
+      mixologists: mixologists
+    });
   });
 });
 
 app.get("/mixologist/:drink_name", function(req, res){
-  var desiredName = req.params.drink_name;
-    var mixologistOutput;
-    db.mixologists.forEach(function(mixologist){
-      if(desiredName === mixologist.drink_name){
-        mixologistOutput = mixologist;
-      }
+  Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
+    res.render("mixologist-show", {
+      mixologist: mixologist
     });
-  res.render("mixologist-show", {
-    mixologist: mixologistOutput
+  });
+});
+
+app.post("/mixologist", function(req, res){
+  Mixologist.create(req.body.mixologist).then(function(mixologist){
+    res.redirect("/mixologist/" + mixologist.drink_name);
+  });
+});
+
+app.post("/mixologist/:drink_name/delete", function(req, res){
+  Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
+    res.redirect("/mixologist")
+  });
+});
+
+app.post("/mixologist:drink_name", function(req, res){
+  Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
+    res.redirect("/mixologist/" + mixologist.drink_name);
   });
 });
 

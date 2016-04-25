@@ -1,6 +1,19 @@
-{{#if mixologist}}
+{{#unless mixologist}}
+<h1> That drink cannot be found! </h1>
+{{else}}
 <h1> {{mixologist.drink_name}} Recipe </h1>
 <h2>{{mixologist.ingredients}}</h2>
-{{else}}
-<h1> That drink cannot be found! </h1>
-{{/if}}
+
+<form method="post" action="/mixologist/{{mixologist.drink_name}}/delete">
+  <button type="submit">Delete</button>
+</form>
+
+<form action="/mixologist/{{mixologist.drink_name}}" method="post">
+  <input type="text" name="mixologist[drink_name]" placeholder="Name" value={{mixologist.drink_name}} />
+  <input type="text" name="mixologist[ingredients]" placeholder="Ingredients" value={{mixologist.ingredients}} />
+  <input type="text" name="mixologist[instructions]" placeholder="Instructions" value={{mixologist.instructions}} />
+
+  <button type="submit">Edit</button>
+</form>
+
+{{/unless}}
