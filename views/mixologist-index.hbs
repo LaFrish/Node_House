@@ -1,0 +1,8 @@
+<h1>Mix it up!</h1>
+
+<h2>{{mixologists.length}} cocktails</h2>
+{{#each mixologists as |mixologist index|}}
+<h3>
+  <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe
+  </h3>
+  {{/each}}

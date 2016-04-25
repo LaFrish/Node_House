@@ -1,0 +1,22 @@
+{
+  "name": "beachhouse",
+  "version": "1.0.0",
+  "description": "Beach House",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaFrish/beachhouse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaFrish/beachhouse/issues"
+  },
+  "homepage": "https://github.com/LaFrish/beachhouse#readme",
+  "dependencies": {
+    "express-handlebars": "^3.0.0"
+  }
+}
