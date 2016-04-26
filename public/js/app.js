@@ -1,11 +1,1 @@
-"use strict";
-
-(function(){
-
-  angular
-  .module("partymode", [
-    "ui.router",
-    "ngResource"
-  ]);
-
-})();
+console.log("Dear God Work!")
