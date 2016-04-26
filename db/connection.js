@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 
-
 var MixologistSchema = new mongoose.Schema(
   {
     drink_name: String,

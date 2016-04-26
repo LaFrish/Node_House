@@ -7,6 +7,7 @@ var qstring = require("qs");
 var cmongo = require("connect-mongo");
 var mongoose= require("./db/connection");
 var twitter = require("./lib/twitter_auth");
+
 var app     = express();
 var SMongo = cmongo(session);
 
@@ -42,8 +43,8 @@ app.engine(".hbs", hbs({
 }));
 
 app.use("/assets", express.static("public"));
-// app.use("/bower", express.static("bower_components"));
 app.use(parser.urlencoded({extended: true}));
+// app.use("/bower", express.static("bower_components"));
 // app.use(function(req, res, next){
 //   twitter.checkIfSignedIn(req, res, function(){
 //     next();
