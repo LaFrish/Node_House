@@ -7,11 +7,13 @@ var qstring = require("qs");
 var cmongo = require("connect-mongo");
 var mongoose= require("./db/connection");
 var twitter = require("./lib/twitter_auth");
-
 var app     = express();
 var SMongo = cmongo(session);
 
+
 var Mixologist = mongoose.model("Mixologist");
+var Boombox = mongoose.model("Boombox");
+var Photobooth = mongoose.model("Photobooth");
 
 if(process.env.NODE_ENV !== "production"){
   var env   = require("./env");
@@ -63,7 +65,7 @@ app.get("/login/twitter/callback", function(req, res){
     res.redirect("/");
   });
 });
-
+// Mixology
 app.get("/mixologist", function(req, res){
   Mixologist.find({}).then(function(mixologists){
     res.render("mixologist-index", {
@@ -92,15 +94,83 @@ app.post("/mixologist/:drink_name/delete", function(req, res){
   });
 });
 
-
-
 app.post("/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
-    console.log("body", req.body)
-    console.log("results", mixologist) 
     res.redirect("/mixologist/" + mixologist.drink_name);
   });
 });
+
+//boombox
+app.get("/boombox", function(req, res){
+  Photobooth.find({}).then(function(boomboxes){
+    res.render("boombox-index", {
+      boomboxes: boomboxes
+    });
+  });
+});
+
+app.get("/boombox/:playlist_name", function(req, res){
+  Photobooth.findOne({playlist_name: req.params.playlist_name}).then(function(boombox){
+    res.render("boombox-show", {
+      boombox: boombox
+    });
+  });
+});
+
+app.post("/boombox", function(req, res){
+  Photobooth.create(req.body.boombox).then(function(boombox){
+    res.redirect("/boombox/" + boombox.playlist_name);
+  });
+});
+
+app.post("/boombox/:playlist_name/delete", function(req, res){
+  Photobooth.findOneAndRemove({playlist_name: req.params.playlist_name}).then(function(){
+    res.redirect("/boombox")
+  });
+});
+
+app.post("/boombox/:playlist_name", function(req, res){
+  Photobooth.findOneAndUpdate({playlist_name: req.params.playlist_name}, req.body.boombox, {new: true}).then(function(boombox){
+    res.redirect("/boombox/" + boombox.playlist_name);
+  });
+});
+
+//photobooth
+
+app.get("/photobooth", function(req, res){
+  Photobooth.find({}).then(function(photobooths){
+    res.render("photobooth-index", {
+      photobooths: photobooths
+    });
+  });
+});
+
+app.get("/photobooth/:photo_name", function(req, res){
+  Photobooth.findOne({photo_name: req.params.photo_name}).then(function(photobooth){
+    res.render("photobooth-show", {
+      photobooth: photobooth
+    });
+  });
+});
+
+app.post("/photobooth", function(req, res){
+  Photobooth.create(req.body.photobooth).then(function(photobooth){
+    res.redirect("/photobooth/" + photobooth.photo_name);
+  });
+});
+
+app.post("/photobooth/:photo_name/delete", function(req, res){
+  Photobooth.findOneAndRemove({photo_name: req.params.photo_name}).then(function(){
+    res.redirect("/photobooth")
+  });
+});
+
+app.post("/photobooth/:photo_name", function(req, res){
+  Photobooth.findOneAndUpdate({photo_name: req.params.photo_name}, req.body.photobooth, {new: true}).then(function(photobooth){
+    res.redirect("/photobooth/" + photobooth.photo_name);
+  });
+});
+
 
 app.listen(app.get("port"), function(){
   console.log("Look at me all working and stuff!")
