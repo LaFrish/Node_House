@@ -16,22 +16,22 @@ var Mixologist = mongoose.model("Mixologist");
 var Boombox = mongoose.model("Boombox");
 var Photobooth = mongoose.model("Photobooth");
 
-if(process.env.NODE_ENV !== "production"){
-  var env   = require("./env");
-  process.env.session_secret = env.session_secret;
-  process.env.t_callback_url = env.t_callback_url;
-  process.env.t_consumer_key = env.t_consumer_key;
-  process.env.t_consumer_secret = env.t_consumer_secret;
-}
-
-app.use(session({
-  secret: process.env.session_secret,
-  resave: false,
-  saveUninitialized: false,
-  store: new SMongo({
-    mongooseConnection: mongoose.connection
-  })
-}));
+// if(process.env.NODE_ENV !== "production"){
+//   var env   = require("./env");
+//   process.env.session_secret = env.session_secret;
+//   process.env.t_callback_url = env.t_callback_url;
+//   process.env.t_consumer_key = env.t_consumer_key;
+//   process.env.t_consumer_secret = env.t_consumer_secret;
+// }
+// 
+// app.use(session({
+//   secret: process.env.session_secret,
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new SMongo({
+//     mongooseConnection: mongoose.connection
+//   })
+// }));
 
 app.set("port", process.env.PORT || 3001);
 app.set("view engine", "hbs");
