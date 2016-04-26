@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.createConnection("mongodb://localhost/");
+mongoose.connect("mongodb://localhost/beachhouse");
 
 var MixologistSchema = new mongoose.Schema(
   {
@@ -22,11 +22,6 @@ var PhotoboothSchema = new mongoose.Schema(
     photo_type: String
   }
 );
-
-
-//from documentation
-
-// Important: the actual interaction with the data happens with the Model that you obtain through mongoose.model or db.model. That's the object that you can instantiate or that you can call .find(), .findOne(), etc upon. Don't confuse schemas and actual models!
 
 mongoose.model("Mixologist", MixologistSchema);
 mongoose.model("Boombox", BoomboxSchema);

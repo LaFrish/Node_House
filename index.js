@@ -23,7 +23,7 @@ var Photobooth = mongoose.model("Photobooth");
 //   process.env.t_consumer_key = env.t_consumer_key;
 //   process.env.t_consumer_secret = env.t_consumer_secret;
 // }
-// 
+
 // app.use(session({
 //   secret: process.env.session_secret,
 //   resave: false,
