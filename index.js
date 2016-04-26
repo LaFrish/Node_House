@@ -51,9 +51,6 @@ app.use(parser.urlencoded({extended: true}));
 //   });
 // });
 
-app.get("/", function(req, res){
-  res.render("welcome");
-});
 
 app.get("/login/twitter", function(req, res){
   twitter.getSigninURL(req, res, function(url){
@@ -66,9 +63,14 @@ app.get("/login/twitter/callback", function(req, res){
     res.redirect("/");
   });
 });
+
+// app.get("/logout, function(req, res)"{
+//   req.session.destroy();
+//   res.redirect("/");
+// });
 // Mixology
 app.get("/mixologist", function(req, res){
-  Mixologist.find({}).then(function(mixologists){
+  Mixologist.find({}).lean().exec().then(function(mixologists){
     res.render("mixologist-index", {
       mixologists: mixologists
     });
@@ -103,7 +105,7 @@ app.post("/mixologist/:drink_name", function(req, res){
 
 //boombox
 app.get("/boombox", function(req, res){
-  Photobooth.find({}).then(function(boomboxes){
+  Photobooth.find({}).lean().exec().then(function(boomboxes){
     res.render("boombox-index", {
       boomboxes: boomboxes
     });
@@ -139,7 +141,7 @@ app.post("/boombox/:playlist_name", function(req, res){
 //photobooth
 
 app.get("/photobooth", function(req, res){
-  Photobooth.find({}).then(function(photobooths){
+  Photobooth.find({}).lean().exec().then(function(photobooths){
     res.render("photobooth-index", {
       photobooths: photobooths
     });
@@ -172,6 +174,9 @@ app.post("/photobooth/:photo_name", function(req, res){
   });
 });
 
+app.get("/*", function(req, res){
+  res.render("beachhouse");
+});
 
 app.listen(app.get("port"), function(){
   console.log("Look at me all working and stuff!")
