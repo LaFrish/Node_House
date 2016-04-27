@@ -68,8 +68,9 @@ app.get("/login/twitter/callback", function(req, res){
 //   req.session.destroy();
 //   res.redirect("/");
 // });
+
 // Mixology
-app.get("/mixologist", function(req, res){
+app.get("api/mixologist", function(req, res){
   Mixologist.find({}).lean().exec().then(function(mixologists){
     res.render("mixologist-index", {
       mixologists: mixologists
@@ -77,7 +78,7 @@ app.get("/mixologist", function(req, res){
   });
 });
 
-app.get("/mixologist/:drink_name", function(req, res){
+app.get("api/mixologist/:drink_name", function(req, res){
   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
     res.render("mixologist-show", {
       mixologist: mixologist
@@ -85,26 +86,26 @@ app.get("/mixologist/:drink_name", function(req, res){
   });
 });
 
-app.post("/mixologist", function(req, res){
+app.post("api/mixologist", function(req, res){
   Mixologist.create(req.body.mixologist).then(function(mixologist){
-    res.redirect("/mixologist/" + mixologist.drink_name);
+    res.redirect("api/mixologist/" + mixologist.drink_name);
   });
 });
 
-app.post("/mixologist/:drink_name/delete", function(req, res){
+app.post("api/mixologist/:drink_name/delete", function(req, res){
   Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
-    res.redirect("/mixologist")
+    res.redirect("api/mixologist")
   });
 });
 
-app.post("/mixologist/:drink_name", function(req, res){
+app.post("api/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
-    res.redirect("/mixologist/" + mixologist.drink_name);
+    res.redirect("api/mixologist/" + mixologist.drink_name);
   });
 });
 
 //boombox
-app.get("/boombox", function(req, res){
+app.get("api/boombox", function(req, res){
   Photobooth.find({}).lean().exec().then(function(boomboxes){
     res.render("boombox-index", {
       boomboxes: boomboxes
@@ -112,7 +113,7 @@ app.get("/boombox", function(req, res){
   });
 });
 
-app.get("/boombox/:playlist_name", function(req, res){
+app.get("api/boombox/:playlist_name", function(req, res){
   Photobooth.findOne({playlist_name: req.params.playlist_name}).then(function(boombox){
     res.render("boombox-show", {
       boombox: boombox
@@ -120,27 +121,27 @@ app.get("/boombox/:playlist_name", function(req, res){
   });
 });
 
-app.post("/boombox", function(req, res){
+app.post("api/boombox", function(req, res){
   Photobooth.create(req.body.boombox).then(function(boombox){
     res.redirect("/boombox/" + boombox.playlist_name);
   });
 });
 
-app.post("/boombox/:playlist_name/delete", function(req, res){
+app.post("api/boombox/:playlist_name/delete", function(req, res){
   Photobooth.findOneAndRemove({playlist_name: req.params.playlist_name}).then(function(){
-    res.redirect("/boombox")
+    res.redirect("api/boombox")
   });
 });
 
-app.post("/boombox/:playlist_name", function(req, res){
+app.post("api/boombox/:playlist_name", function(req, res){
   Photobooth.findOneAndUpdate({playlist_name: req.params.playlist_name}, req.body.boombox, {new: true}).then(function(boombox){
-    res.redirect("/boombox/" + boombox.playlist_name);
+    res.redirect("api/boombox/" + boombox.playlist_name);
   });
 });
 
 //photobooth
 
-app.get("/photobooth", function(req, res){
+app.get("api/photobooth", function(req, res){
   Photobooth.find({}).lean().exec().then(function(photobooths){
     res.render("photobooth-index", {
       photobooths: photobooths
@@ -148,7 +149,7 @@ app.get("/photobooth", function(req, res){
   });
 });
 
-app.get("/photobooth/:photo_name", function(req, res){
+app.get("api/photobooth/:photo_name", function(req, res){
   Photobooth.findOne({photo_name: req.params.photo_name}).then(function(photobooth){
     res.render("photobooth-show", {
       photobooth: photobooth
@@ -156,21 +157,21 @@ app.get("/photobooth/:photo_name", function(req, res){
   });
 });
 
-app.post("/photobooth", function(req, res){
+app.post("api/photobooth", function(req, res){
   Photobooth.create(req.body.photobooth).then(function(photobooth){
-    res.redirect("/photobooth/" + photobooth.photo_name);
+    res.redirect("api/photobooth/" + photobooth.photo_name);
   });
 });
 
-app.post("/photobooth/:photo_name/delete", function(req, res){
+app.post("api/photobooth/:photo_name/delete", function(req, res){
   Photobooth.findOneAndRemove({photo_name: req.params.photo_name}).then(function(){
-    res.redirect("/photobooth")
+    res.redirect("api/photobooth")
   });
 });
 
-app.post("/photobooth/:photo_name", function(req, res){
+app.post("api/photobooth/:photo_name", function(req, res){
   Photobooth.findOneAndUpdate({photo_name: req.params.photo_name}, req.body.photobooth, {new: true}).then(function(photobooth){
-    res.redirect("/photobooth/" + photobooth.photo_name);
+    res.redirect("api/photobooth/" + photobooth.photo_name);
   });
 });
 

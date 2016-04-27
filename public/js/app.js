@@ -86,7 +86,7 @@
     // })
     .state("mixIndex", {
       url: "/mixologist",
-      templateUrl: "assets/html/mixologist.html",
+      templateUrl: "assets/html/mixologist-index.html",
       controller: "MixIndexCtrl",
       controllerAs: "MixIndexVM"
     })
@@ -122,8 +122,8 @@
     });
     $urlRouterProvider.otherwise("/");
   }
-  function Beachhouse($resource){
-    var Beachhouse = $resource("/beachhouse/:name",
+  function BeachhouseFactory($resource){
+    var Beachhouse = $resource("/beachhouse/",
   {}, {
     update: {method: "PUT"}
   });
@@ -134,9 +134,13 @@
     var vm = this;
     vm.beachhouses = Beachhouse.all;
   }
+  function BHShowCtrl(Beachhouse){
+    var vm = this;
+    vm.beachhouses = Beachhouse.all;
+  };
 
-  function Mixologist($resource){
-    var Mixologist = $resource("/mixologist/:drink_name",
+  function MixologistFactory($resource){
+    var Mixologist = $resource("/mixologist",
   {}, {
     update: {method: "PUT"}
   });
@@ -147,13 +151,13 @@
     var vm = this;
     vm.mixologists = Mixologist.all;
   }
-  // function MixShowCtrl(Mixologist){
-  //   var vm = this;
-  //   vm.mixologists = Mixologist.all;
-  // }
+  function MixShowCtrl(Mixologist){
+    var vm = this;
+    vm.mixologists = Mixologist.all;
+  };
 
-  function Boombox($resource){
-    var Boombox = $resource("/boombox/:playlist_name",
+  function BoomboxFactory($resource){
+    var Boombox = $resource("/boombox",
   {}, {
     update: {method: "PUT"}
   });
@@ -164,12 +168,12 @@
     var vm = this;
     vm.boomboxes = Boombox.all;
   }
-  // function BHIndexCtrl(Boombox){
-  //   var vm = this;
-  //   vm.boomboxes = Boombox.all;
-  // }
+  function BHIndexCtrl(Boombox){
+    var vm = this;
+    vm.boomboxes = Boombox.all;
+  };
 
-  function Photobooth($resource){
+  function PhotoboothFactory($resource){
     var Photobooth = $resource("/photobooth/:photo_name",
   {}, {
     update: {method: "PUT"}
@@ -181,8 +185,8 @@
     var vm = this;
     vm.photobooths = Photobooth.all;
   }
-  // function BHShowCtrl(Photobooth){
-  //   var vm = this;
-  //   vm.photobooths = Photobooth.all;
-  // }
+  function BHShowCtrl(Photobooth){
+    var vm = this;
+    vm.photobooths = Photobooth.all;
+  };
 })();
