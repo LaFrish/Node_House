@@ -68,11 +68,11 @@
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
-    .state("beachhouse-welcome",{
+    .state("Beachhouse-welcome",{
       url: "/",
       templateUrl: "assets/html/beachhouse-welcome.html"
     })
-    .state("beachhouse-index",{
+    .state("Beachhouse-index",{
       url: "/beachhouse",
       templateUrl: "assets/html/beachhouse-index.html",
       controller: "BHIndexCtrl",
@@ -84,37 +84,37 @@
     //   controller: "BHShowCtrl",
     //   controllerAs: "BHShowVM"
     // })
-    .state("mixIndex", {
+    .state("MixIndex", {
       url: "/mixologist",
       templateUrl: "assets/html/mixologist-index.html",
       controller: "MixIndexCtrl",
       controllerAs: "MixIndexVM"
     })
-    .state("mixShow",{
+    .state("MixShow",{
       url: "/mixologist/:drink_name",
       templateUrl: "assets/html/mixologist-show.html",
       controller: "MixShowCtrl",
       controllerAs: "MixShowVM"
     })
-    .state("boomIndex",{
+    .state("BoomIndex",{
       url: "/boombox",
       templateUrl: "assets/html/boombox-index.html",
       controller: "BoomIndexCtrl",
       controllerAs:"BoomIndexVM"
     })
-    .state("boomShow",{
+    .state("BoomShow",{
       url: "/boombox/:playlist_name",
       templateUrl: "assets/html/boombox-show.html",
       controller: "BoomShowCtrl",
       controllerAs:"BoomShowVM"
     })
-    .state("photoIndex",{
+    .state("PhotoIndex",{
       url: "/photobooth",
       templateUrl: "assets/html/photobooth-index.html",
       controller: "PhotoIndexCtrl",
       controllerAs:"PhotoIndexVM"
     })
-    .state("photoShow",{
+    .state("PhotoShow",{
       url: "/photobooth/:photo_name",
       templateUrl: "assets/html/photobooth-show.html",
       controller: "PhotoShowCtrl",
