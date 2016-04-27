@@ -43,8 +43,8 @@ app.engine(".hbs", hbs({
 }));
 
 app.use("/assets", express.static("public"));
+app.use("/bower", express.static("bower_components"));
 app.use(parser.urlencoded({extended: true}));
-// app.use("/bower", express.static("bower_components"));
 // app.use(function(req, res, next){
 //   twitter.checkIfSignedIn(req, res, function(){
 //     next();

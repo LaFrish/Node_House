@@ -1,6 +1,3 @@
-//= require angular
-//= require angular-resource
-//= require angular-ui-router
 "use strict";
 
 (function(){
@@ -8,9 +5,11 @@
   .module("beachhouse", [
     "ui.router",
     "ngResource"
-  ]);
+  ])
   .config([
     "$stateProvider",
+    "$locationProvider",
+    "$urlRouterProvider",
     RouterFunction
   ])
   .factory("Beachhouse", [
@@ -32,34 +31,34 @@
   .controller("BHIndexCtrl", [
     "BeachhouseFactory",
     BHIndexCtrl
-  ]);
+  ])
   .controller("BHShowCtrl", [
     "BeachhouseFactory",
     "$stateParams",
     BHShowCtrl
-  ]);
+  ])
   .controller("MixIndexCtrl", [
     "MixologistFactory",
     MixIndexCtrl
-  ]);
+  ])
   .controller("MixShowCtrl", [
     "MixologistFactory",
     "$stateParams",
     MixShowCtrl
-  ]);
+  ])
   .controller("BoomIndexCtrl", [
     "BoomboxFactory",
     BoomIndexCtrl
-  ]);
+  ])
   .controller("BoomShowCtrl", [
     "BoomboxFactory",
     "$stateParams",
     BoomShowCtrl
-  ]);
+  ])
   .controller("PhotoIndexCtrl", [
     "PhotoboothFactory",
     PhotoIndexCtrl
-  ]);
+  ])
   .controller("PhotoShowCtrl", [
     "PhotoboothFactory",
     "$stateParams",
@@ -69,52 +68,52 @@
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
-    .state("beachhouse-home",{
+    .state("beachhouse-welcome",{
       url: "/",
-      templateUrl: "assets/html/beachhouse-index.html"
+      templateUrl: "assets/html/beachhouse-welcome.html"
     })
-    // .state("beachhouse-index",{
-    //   url: "/beachhouse",
-    //   templateUrl: "assets/html/beachhouse-index.html",
-    //   controller: "BHIndexCtrl",
-    //   controllerAs: "BHIndexVM"
-    // });
+    .state("beachhouse-index",{
+      url: "/beachhouse",
+      templateUrl: "assets/html/beachhouse-index.html",
+      controller: "BHIndexCtrl",
+      controllerAs: "BHIndexVM"
+    })
     // .state("",{
     //   url: "/",
     //   templateUrl: "assets/html/.html",
     //   controller: "BHShowCtrl",
     //   controllerAs: "BHShowVM"
-    // });
-    .state("mixIndex",{
+    // })
+    .state("mixIndex", {
       url: "/mixologist",
       templateUrl: "assets/html/mixologist.html",
       controller: "MixIndexCtrl",
       controllerAs: "MixIndexVM"
-    });
+    })
     .state("mixShow",{
       url: "/mixologist/:drink_name",
       templateUrl: "assets/html/mixologist-show.html",
       controller: "MixShowCtrl",
       controllerAs: "MixShowVM"
-    });
+    })
     .state("boomIndex",{
       url: "/boombox",
       templateUrl: "assets/html/boombox-index.html",
       controller: "BoomIndexCtrl",
       controllerAs:"BoomIndexVM"
-    });
+    })
     .state("boomShow",{
       url: "/boombox/:playlist_name",
       templateUrl: "assets/html/boombox-show.html",
       controller: "BoomShowCtrl",
       controllerAs:"BoomShowVM"
-    });
+    })
     .state("photoIndex",{
       url: "/photobooth",
       templateUrl: "assets/html/photobooth-index.html",
       controller: "PhotoIndexCtrl",
       controllerAs:"PhotoIndexVM"
-    });
+    })
     .state("photoShow",{
       url: "/photobooth/:photo_name",
       templateUrl: "assets/html/photobooth-show.html",
