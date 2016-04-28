@@ -30,40 +30,64 @@
   ])
   .controller("BHIndexCtrl", [
     "BeachhouseFactory",
-    BHIndexCtrl
+    BHIndexCtrlFunction
   ])
   .controller("BHShowCtrl", [
     "BeachhouseFactory",
     "$stateParams",
-    BHShowCtrl
+    BHShowCtrlFunction
   ])
   .controller("MixIndexCtrl", [
     "MixologistFactory",
-    MixIndexCtrl
+    MixIndexCtrlFunction
   ])
   .controller("MixShowCtrl", [
     "MixologistFactory",
     "$stateParams",
-    MixShowCtrl
+    MixShowCtrlFunction
   ])
   .controller("BoomIndexCtrl", [
     "BoomboxFactory",
-    BoomIndexCtrl
+    BoomIndexCtrlFunction
   ])
   .controller("BoomShowCtrl", [
     "BoomboxFactory",
     "$stateParams",
-    BoomShowCtrl
+    BoomShowCtrlFunction
   ])
   .controller("PhotoIndexCtrl", [
     "PhotoboothFactory",
-    PhotoIndexCtrl
+    PhotoIndexCtrlFunction
   ])
   .controller("PhotoShowCtrl", [
     "PhotoboothFactory",
     "$stateParams",
-    PhotoShowCtrl
+    PhotoShowCtrlFunction
+  ])
+  .controller("ContestIndexCtrl", [
+    "ContestFactory",
+    ContestIndexCtrlFunction
+  ])
+  .controller("ContestShowCtrl", [
+    "ContestFactory",
+    "$stateParams",
+    ContestShowCtrlFunction
+  ])
+  .directive("ContestForm", [
+    "ContestFactory",
+    "$state",
+    ContestFormDirectiveFunction
+  ])
+  .controller("CalendarIndexCtrl", [
+    "CalendarFactory",
+    CalendarIndexCtrlFunction
+  ])
+  .controller("CalendarShowCtrl", [
+    "CalendarFactory",
+    "$stateParams",
+    CalendarShowCtrlFunction
   ]);
+
 
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
@@ -119,74 +143,141 @@
       templateUrl: "assets/html/photobooth-show.html",
       controller: "PhotoShowCtrl",
       controllerAs:"PhotoShowVM"
+    })
+    .state("ContestIndex",{
+      url: "/Contest",
+      templateUrl: "assets/html/contest-index.html",
+      controller: "ContestIndexCtrl",
+      controllerAs:"ContestIndexVM"
+    })
+    .state("ContestShow",{
+      url: "/Contest/entry",
+      templateUrl: "assets/html/contest-show.html",
+      controller: "ContestShowCtrl",
+      controllerAs:"ContestShowVM"
+    })
+    .state("CalendarIndex",{
+      url: "/photobooth/:photo_name",
+      templateUrl: "assets/html/photobooth-show.html",
+      controller: "PhotoShowCtrl",
+      controllerAs:"PhotoShowVM"
+    })
+    .state("CalendarShow",{
+      url: "/photobooth/:photo_name",
+      templateUrl: "assets/html/photobooth-show.html",
+      controller: "PhotoShowCtrl",
+      controllerAs:"PhotoShowVM"
     });
     $urlRouterProvider.otherwise("/");
   }
   function BeachhouseFactory($resource){
-    var Beachhouse = $resource("/beachhouse/",
+    var Beachhouse = $resource("/beachhouse",
   {}, {
     update: {method: "PUT"}
   });
   Beachhouse.all = Beachhouse.query();
   return Beachhouse;
   }
-  function BHIndexCtrl(Beachhouse){
+  function BHIndexCtrlFunction(Beachhouse){
     var vm = this;
     vm.beachhouses = Beachhouse.all;
   }
-  function BHShowCtrl(Beachhouse){
+  function BHShowCtrlFunction(Beachhouse){
     var vm = this;
     vm.beachhouses = Beachhouse.all;
   };
 
   function MixologistFactory($resource){
-    var Mixologist = $resource("/mixologist",
+    var Mixologist = $resource("/mixologist/drink_name",
   {}, {
     update: {method: "PUT"}
   });
   Mixologist.all = Mixologist.query();
   return Mixologist;
   }
-  function MixIndexCtrl(Mixologist){
+  function MixIndexCtrlFunction(Mixologist){
     var vm = this;
     vm.mixologists = Mixologist.all;
   }
-  function MixShowCtrl(Mixologist){
+  function MixShowCtrlFunction(Mixologist){
     var vm = this;
     vm.mixologists = Mixologist.all;
   };
 
   function BoomboxFactory($resource){
-    var Boombox = $resource("/boombox",
+    var Boombox = $resource("/boombox/playlist_name",
   {}, {
     update: {method: "PUT"}
   });
   Boombox.all = Boombox.query();
   return Boombox;
   }
-  function BHIndexCtrl(Boombox){
+  function BoomIndexCtrlFunction(Boombox){
     var vm = this;
     vm.boomboxes = Boombox.all;
   }
-  function BHIndexCtrl(Boombox){
+  function BoomShowCtrlFunction(Boombox){
     var vm = this;
     vm.boomboxes = Boombox.all;
   };
 
   function PhotoboothFactory($resource){
-    var Photobooth = $resource("/photobooth/:photo_name",
+    var Photobooth = $resource("/photobooth/photo_name",
   {}, {
     update: {method: "PUT"}
   });
   Photobooth.all = Photobooth.query();
   return Photobooth;
   }
-  function BHIndexCtrl(Photobooth){
+  function PhotoIndexCtrlFunction(Photobooth){
     var vm = this;
     vm.photobooths = Photobooth.all;
   }
-  function BHShowCtrl(Photobooth){
+  function PhotoShowCtrlFunction(Photobooth){
     var vm = this;
     vm.photobooths = Photobooth.all;
   };
+
+  function ContestFactory($resource){
+    var Contest = $resource("/contest/entry",
+  {}, {
+    update: {method: "PUT"}
+  });
+  Contest.all = Contest.query();
+  return Contest;
+  }
+  function ContestIndexCtrlFunction(Contest){
+    var vm = this;
+    vm.contests = Contest.all;
+  }
+  function ContestShowCtrlFunction(Contest){
+    var vm = this;
+    vm.contests = Contest.all;
+  };
+
+  function CalendarFactory($resource){
+    var Calendar = $resource("/calendar/show",
+  {}, {
+    update: {method: "PUT"}
+  });
+  Calendar.all = Calendar.query();
+  return Calendar;
+  }
+  function CalendarIndexCtrlFunction(Calendar){
+    var vm = this;
+    vm.calendars = Calendar.all;
+  }
+  function CalendarShowCtrlFunction(Calendar){
+    var vm = this;
+    vm.calendars = Contest.all;
+  };
+  function ContestFormDirectiveFunction(ContestFactory, $state){
+    return{
+      templateUrl: "assets/html/contest-form.html",
+      scope: {
+        grumble: "="
+      },
+
+          });
+        }
 })();

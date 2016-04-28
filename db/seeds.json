@@ -6,7 +6,8 @@
       "Lime Juice",
       "Ginger Beer"
     ],
-      "instructions": "Mix all together"
+      "instructions": "Mix all together",
+      "photo_url": "www.google.com"
   },
   {
     "drink_name": "Holy Water",
@@ -14,6 +15,7 @@
       "Vodka",
       "Lemons"
     ],
-    "instructions": "Mix all together"
+    "instructions": "Mix all together",
+    "photo_url": "www.google.com"
   }
 ]

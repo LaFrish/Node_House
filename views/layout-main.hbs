@@ -2,20 +2,13 @@
 <html>
 <head>
     <title>Beach House</title>
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet/text/x-scss" href="/assets/css/styles.css.scss" />
     <base href="/"></base>
 </head>
-
-<header>
+<body>
   <div class="vertical-list">
-    <ul>
-      <li><a href="/"> NODE House</a></li>
-      <li><a href="/mixologist">Personal Mixologist</a></li>
-      <li><a href="/photobooth">Photobooth</a></li>
-      <li><a href="/boombox">Playlist</a></li>
-    </ul>
+    <a href="/"> NODE House</a> | <a href="/mixologist">Personal Mixologist</a> | <a href="/photobooth">Photobooth</a> | <a href="/boombox">Playlist</a> | <a href="/contest">Contest</a> | <a href="/calendar">Calendar</a>
   </div>
-      <header>
     <nav>
         {{#if user}}
             <img src="{{user.t_photo_url}}" alt="{{user.name}}" /> Welcome, {{user.name}}!
@@ -24,11 +17,11 @@
             <a href="/login/twitter">Sign in</a>
         {{/if}}
     </nav>
-<body>
+
+
 <h1> Create artwork </br>
   Make logo</h1>
 
     {{{body}}}
 </body>
-
 </html>
