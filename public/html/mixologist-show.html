@@ -1,41 +1,30 @@
 <h2><a data-ui-sref="MixShow"></a></h2>
 
-
-        <h1>{{mixologist.drink_name}} Recipe </h1>
-        <h2>{{mixologist.ingredients}}</h2>
-        <h2>{{mixologist.instructions}}</h2>
-
-        <form method="post" action="/mixologist/{{mixologist.drink_name}}/delete">
+        <form method="post" action="delete">
             <button type="submit">Delete</button>
         </form>
 
-        <form action="/mixologist/{{mixologist.drink_name}}" method="post">
-            <input type="text" name="mixologist[drink_name]" placeholder="Name" value="{{mixologist.drink_name}}" />
-            <input type="text" name="mixologist[ingredients]" placeholder="Ingredients" value="{{mixologist.ingredients}}" />
-            <input type="text" name="mixologist[instructions]" placeholder="Instructions" value="{{mixologist.instructions}}" />
-            <button type="submit">Edit</button>
-        </form>
-
-
-
 
         <div data-ng-if="!MixShowVM.mixologist">
+
           <h2>That drink couldn't be found!</h2>
         </div>
         <div data-ng-if="MixShowVM.mixologist">
 
-          <h2>{{MixShowVM.mixologist.drink_name}} </h2>
+          <h2>{{MixShowVM.mixologist.drink_name}}
+          {{MixShowVM.mixologist.ingredients}}
+        {{MixShowVM.mixologist.instructions}} </h2>
 
-          <div data-ng-if="MixShowVM.mixologist.isCurrentUser">
+          <div data-ng-if="MixShowVM.mixologist">
             <button data-ng-click="MixShowVM.update()">Edit</button>
             <button data-ng-click="MixShowVM.delete()">Delete</button>
           </div>
 
           <div data-ng-repeat="drink in MixShowVM.mixologist.drinks">
 
-          <div data-ng-if="MixShowVM.mixologist.isCurrentUser">
-            <textarea data-ng-model="MixShowVM.newDrink"></textarea>
-            <button data-ng-click="MixShowVM.addDrink()">Add a Drink</button>
+          <div data-ng-if="mixologist">
+            <textarea data-ng-model="newDrink"></textarea>
+            <button data-ng-click="addDrink()">Add a Drink</button>
           </div>
 
         </div>

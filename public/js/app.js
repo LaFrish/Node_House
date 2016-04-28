@@ -103,43 +103,43 @@
       templateUrl: "assets/html/mixologist-show.html",
       controller: "MixShowCtrl",
       controllerAs: "MixShowVM"
-    })
-    .state("BoomIndex",{
-      url: "/boombox",
-      templateUrl: "assets/html/boombox-index.html",
-      controller: "BoomIndexCtrl",
-      controllerAs:"BoomIndexVM"
-    })
-    .state("BoomShow",{
-      url: "/boombox/:playlist_name",
-      templateUrl: "assets/html/boombox-show.html",
-      controller: "BoomShowCtrl",
-      controllerAs:"BoomShowVM"
-    })
-    .state("PhotoIndex",{
-      url: "/photobooth",
-      templateUrl: "assets/html/photobooth-index.html",
-      controller: "PhotoIndexCtrl",
-      controllerAs:"PhotoIndexVM"
-    })
-    .state("PhotoShow",{
-      url: "/photobooth/:photo_name",
-      templateUrl: "assets/html/photobooth-show.html",
-      controller: "PhotoShowCtrl",
-      controllerAs:"PhotoShowVM"
-    })
-    .state("ContestIndex",{
-      url: "/contest",
-      templateUrl: "assets/html/contest-index.html",
-      controller: "ContestIndexCtrl",
-      controllerAs:"ContestIndexVM"
-    })
-    .state("ContestShow",{
-      url: "/contest/:entry",
-      templateUrl: "assets/html/contest-show.html",
-      controller: "ContestShowCtrl",
-      controllerAs:"ContestShowVM"
     });
+    // .state("BoomIndex",{
+    //   url: "/boombox",
+    //   templateUrl: "assets/html/boombox-index.html",
+    //   controller: "BoomIndexCtrl",
+    //   controllerAs:"BoomIndexVM"
+    // })
+    // .state("BoomShow",{
+    //   url: "/boombox/:playlist_name",
+    //   templateUrl: "assets/html/boombox-show.html",
+    //   controller: "BoomShowCtrl",
+    //   controllerAs:"BoomShowVM"
+    // })
+    // .state("PhotoIndex",{
+    //   url: "/photobooth",
+    //   templateUrl: "assets/html/photobooth-index.html",
+    //   controller: "PhotoIndexCtrl",
+    //   controllerAs:"PhotoIndexVM"
+    // })
+    // .state("PhotoShow",{
+    //   url: "/photobooth/:photo_name",
+    //   templateUrl: "assets/html/photobooth-show.html",
+    //   controller: "PhotoShowCtrl",
+    //   controllerAs:"PhotoShowVM"
+    // })
+    // .state("ContestIndex",{
+    //   url: "/contest",
+    //   templateUrl: "assets/html/contest-index.html",
+    //   controller: "ContestIndexCtrl",
+    //   controllerAs:"ContestIndexVM"
+    // })
+    // .state("ContestShow",{
+    //   url: "/contest/:entry",
+    //   templateUrl: "assets/html/contest-show.html",
+    //   controller: "ContestShowCtrl",
+    //   controllerAs:"ContestShowVM"
+    // });
     // .state("CalendarIndex",{
     //   url: "/photobooth/:photo_name",
     //   templateUrl: "assets/html/photobooth-show.html",
@@ -169,13 +169,13 @@
     });
     Mixologist.all = Mixologist.query();
     console.log(Mixologist.all);
-    // Mixologist.find = function(property, value, callback){
-    //   Mixologist.$promise.then(function(){
-    //     Mixologist.forEach(function(mixologist){
-    //       if(mixologist[property]== value) callback(mixologist);
-    //     });
-    //   });
-    // }
+    Mixologist.find = function(property, value, callback){
+    Mixologist.all.$promise.then(function(){
+        Mixologist.all.forEach(function(mixologist){
+          if(mixologist[property] == value) callback(mixologist);
+        });
+      });
+    }
     return Mixologist;
   }
   function MixIndexCtrlFunction(Mixologist){
@@ -188,6 +188,7 @@
     var vm = this;
     Mixologist.find("drink_name", $stateParams.drink_name, function(mixologist){
       vm.mixologist = mixologist;
+      console.log(vm.mixologist);
     });
     vm.update = function(){
       Mixologist.update({drink_name: vm.mixologist.drink_name}, {mixologist: vm.mixologist}, function(){

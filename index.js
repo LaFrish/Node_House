@@ -16,10 +16,10 @@ var SMongo = cmongo(session);
 
 
 var Mixologist = mongoose.model("Mixologist");
-var Boombox = mongoose.model("Boombox");
-var Photobooth = mongoose.model("Photobooth");
-var Calendar = mongoose.model("Calendar");
-var Contest = mongoose.model("Contest");
+// var Boombox = mongoose.model("Boombox");
+// var Photobooth = mongoose.model("Photobooth");
+// var Calendar = mongoose.model("Calendar");
+// var Contest = mongoose.model("Contest");
 
 
 // if(process.env.NODE_ENV !== "production"){
@@ -83,162 +83,162 @@ app.get("/api/mixologist", function(req, res){
   });
 });
 
-app.get("api/mixologist/:drink_name", function(req, res){
+app.get("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
-    mixologist.isCurrentUser = (mixologist._id == req.session.mixologist_id)
+    // mixologist.isCurrentUser = (mixologist._id == req.session.mixologist_id)
     res.json(mixologist);
   });
 });
 
-app.post("api/mixologist", function(req, res){
-  Mixologist.create(req.body.mixologist).then(function(mixologist){
-    res.redirect("api/mixologist/" + mixologist.drink_name);
+app.post("/api/mixologist", function(req, res){
+  Mixologist.create(req.body.mixologist).then(function(mixologists){
+    res.json("mixologists");
   });
 });
 
-app.delete("api/mixologist/:drink_name/delete", function(req, res){
+app.delete("/api/mixologist/:drink_name/delete", function(req, res){
   Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
     res.json({success: true});
   });
 });
 
-app.put("api/mixologist/:drink_name", function(req, res){
+app.put("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
     res.json("mixologist");
   });
 });
 
 //boombox
-app.get("api/boombox", function(req, res){
-  Photobooth.find({}).lean().exec().then(function(boomboxes){
-    res.json(boombox);
-  });
-});
-
-app.get("api/boombox/:playlist_name", function(req, res){
-  Photobooth.findOne({playlist_name: req.params.playlist_name}).then(function(boombox){
-    boombox.isCurrentUser = (boombox._id == req.session.boombox_id)
-    res.json(boombox);
-  });
-});
-
-app.post("api/boombox", function(req, res){
-  Photobooth.create(req.body.boombox).then(function(boombox){
-    res.redirect("/boombox/" + boombox.playlist_name);
-  });
-});
-
-app.delete("api/boombox/:playlist_name/delete", function(req, res){
-  Photobooth.findOneAndRemove({playlist_name: req.params.playlist_name}).then(function(){
-    res.json({success: true});
-  });
-});
-
-app.put("api/boombox/:playlist_name", function(req, res){
-  Photobooth.findOneAndUpdate({playlist_name: req.params.playlist_name}, req.body.boombox, {new: true}).then(function(boombox){
-    res.json(boombox);
-  });
-});
-
-//photobooth
-
-app.get("api/photobooth", function(req, res){
-  Photobooth.find({}).lean().exec().then(function(photobooths){
-    res.json("photobooth");
-  });
-});
-
-app.get("api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOne({photo_name: req.params.photo_name}).then(function(photobooth){
-    photobooth.isCurrentUser = (photobooth._id == req.session.photobooth_id)
-    res.json(photobooth);
-  });
-});
-
-app.post("api/photobooth", function(req, res){
-  Photobooth.create(req.body.photobooth).then(function(photobooth){
-    res.redirect("api/photobooth/" + photobooth.photo_name);
-  });
-});
-
-app.delete("api/photobooth/:photo_name/delete", function(req, res){
-  Photobooth.findOneAndRemove({photo_name: req.params.photo_name}).then(function(){
-    res.json({success: true});
-  });
-});
-
-app.put("api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOneAndUpdate({photo_name: req.params.photo_name}, req.body.photobooth, {new: true}).then(function(photobooth){
-    res.json(photobooth);
-  });
-});
-
-//calendar
-//
-// app.get("api/calendar", function(req, res){
-//   Calendar.find({}).lean().exec().then(function(calendars){
-//     res.json(calendar);
+// app.get("api/boombox", function(req, res){
+//   Photobooth.find({}).lean().exec().then(function(boomboxes){
+//     res.json(boombox);
 //   });
 // });
 //
-// app.get("api/calendar/:date", function(req, res){
-//   Calendar.findOne({date: req.params.date}).then(function(calendar){
-//     res.render(calendar);
-//     calendar.isCurrentUser = (calendar._id == req.session.calendar_id)
-//     res.json(calendar);
+// app.get("api/boombox/:playlist_name", function(req, res){
+//   Photobooth.findOne({playlist_name: req.params.playlist_name}).then(function(boombox){
+//     boombox.isCurrentUser = (boombox._id == req.session.boombox_id)
+//     res.json(boombox);
 //   });
 // });
 //
-// app.post("api/calendar", function(req, res){
-//   Calendar.create(req.body.calendar).then(function(calendar){
-//     res.redirect("api/calendar/" + calendar.date);
+// app.post("api/boombox", function(req, res){
+//   Photobooth.create(req.body.boombox).then(function(boombox){
+//     res.redirect("/boombox/" + boombox.playlist_name);
 //   });
 // });
 //
-// app.post("api/calendar/:date/delete", function(req, res){
-//   Calendar.findOneAndRemove({date: req.params.date}).then(function(){
-//     res.redirect("api/calendar")
-//   });
-// });
-//
-// app.put("api/calendar/:date", function(req, res){
-//   Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
+// app.delete("api/boombox/:playlist_name/delete", function(req, res){
+//   Photobooth.findOneAndRemove({playlist_name: req.params.playlist_name}).then(function(){
 //     res.json({success: true});
 //   });
 // });
-
-//contest
-
-app.get("api/contest", function(req, res){
-  Contest.find({}).lean().exec().then(function(contests){
-    res.render(contest);
-  });
-});
-
-app.get("api/contest/:entry", function(req, res){
-  Contest.findOne({entry: req.params.entry}).then(function(contest){
-    contest.isCurrentUser = (contest._id == req.session.contest_id)
-    res.json(contest);
-  });
-});
-
-app.post("api/contest", function(req, res){
-  Contest.create(req.body.contest).then(function(contest){
-    res.redirect("api/contest/" + contest.entry);
-  });
-});
-
-app.delete("api/contest/:entry/delete", function(req, res){
-  Contest.findOneAndRemove({entry: req.params.entry}).then(function(){
-    res.json({success: true});
-  });
-});
-
-app.post("api/contest/:entry", function(req, res){
-  Contest.findOneAndUpentry({entry: req.params.entry}, req.body.contest, {new: true}).then(function(contest){
-    res.json(contest);
-  });
-});
+//
+// app.put("api/boombox/:playlist_name", function(req, res){
+//   Photobooth.findOneAndUpdate({playlist_name: req.params.playlist_name}, req.body.boombox, {new: true}).then(function(boombox){
+//     res.json(boombox);
+//   });
+// });
+//
+// //photobooth
+//
+// app.get("api/photobooth", function(req, res){
+//   Photobooth.find({}).lean().exec().then(function(photobooths){
+//     res.json("photobooth");
+//   });
+// });
+//
+// app.get("api/photobooth/:photo_name", function(req, res){
+//   Photobooth.findOne({photo_name: req.params.photo_name}).then(function(photobooth){
+//     photobooth.isCurrentUser = (photobooth._id == req.session.photobooth_id)
+//     res.json(photobooth);
+//   });
+// });
+//
+// app.post("api/photobooth", function(req, res){
+//   Photobooth.create(req.body.photobooth).then(function(photobooth){
+//     res.redirect("api/photobooth/" + photobooth.photo_name);
+//   });
+// });
+//
+// app.delete("api/photobooth/:photo_name/delete", function(req, res){
+//   Photobooth.findOneAndRemove({photo_name: req.params.photo_name}).then(function(){
+//     res.json({success: true});
+//   });
+// });
+//
+// app.put("api/photobooth/:photo_name", function(req, res){
+//   Photobooth.findOneAndUpdate({photo_name: req.params.photo_name}, req.body.photobooth, {new: true}).then(function(photobooth){
+//     res.json(photobooth);
+//   });
+// });
+//
+// //calendar
+// //
+// // app.get("api/calendar", function(req, res){
+// //   Calendar.find({}).lean().exec().then(function(calendars){
+// //     res.json(calendar);
+// //   });
+// // });
+// //
+// // app.get("api/calendar/:date", function(req, res){
+// //   Calendar.findOne({date: req.params.date}).then(function(calendar){
+// //     res.render(calendar);
+// //     calendar.isCurrentUser = (calendar._id == req.session.calendar_id)
+// //     res.json(calendar);
+// //   });
+// // });
+// //
+// // app.post("api/calendar", function(req, res){
+// //   Calendar.create(req.body.calendar).then(function(calendar){
+// //     res.redirect("api/calendar/" + calendar.date);
+// //   });
+// // });
+// //
+// // app.post("api/calendar/:date/delete", function(req, res){
+// //   Calendar.findOneAndRemove({date: req.params.date}).then(function(){
+// //     res.redirect("api/calendar")
+// //   });
+// // });
+// //
+// // app.put("api/calendar/:date", function(req, res){
+// //   Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
+// //     res.json({success: true});
+// //   });
+// // });
+//
+// //contest
+//
+// app.get("api/contest", function(req, res){
+//   Contest.find({}).lean().exec().then(function(contests){
+//     res.render(contest);
+//   });
+// });
+//
+// app.get("api/contest/:entry", function(req, res){
+//   Contest.findOne({entry: req.params.entry}).then(function(contest){
+//     contest.isCurrentUser = (contest._id == req.session.contest_id)
+//     res.json(contest);
+//   });
+// });
+//
+// app.post("api/contest", function(req, res){
+//   Contest.create(req.body.contest).then(function(contest){
+//     res.redirect("api/contest/" + contest.entry);
+//   });
+// });
+//
+// app.delete("api/contest/:entry/delete", function(req, res){
+//   Contest.findOneAndRemove({entry: req.params.entry}).then(function(){
+//     res.json({success: true});
+//   });
+// });
+//
+// app.post("api/contest/:entry", function(req, res){
+//   Contest.findOneAndUpentry({entry: req.params.entry}, req.body.contest, {new: true}).then(function(contest){
+//     res.json(contest);
+//   });
+// });
 
 app.get("/*", function(req, res){
   res.render("beachhouse");

@@ -9,6 +9,13 @@
   <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe!!</a>
 </h3>
 
+
+<div data-ng-if="showVM.mixologist">
+
+    <textarea data-ng-model="showVM.newDrink"></textarea>
+    <button data-ng-click="showVM.newDrink()">Add a drink</button>
+  </div>
+
 <form action="/mixologist" method="post">
     <input type="text" data-ng-model="mixologist.drink_name" placeholder="Name" />
     <input type="string" name="mixologist.ingredients" placeholder="Ingredients" />
