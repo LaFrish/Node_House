@@ -76,9 +76,10 @@ app.get("/login/twitter/callback", function(req, res){
 // });
 
 // Mixology
-app.get("api/mixologist", function(req, res){
+app.get("/api/mixologist", function(req, res){
   Mixologist.find({}).lean().exec().then(function(mixologists){
-    res.json(mixologist);
+    console.log(mixologists);
+    res.json(mixologists);
   });
 });
 
@@ -173,38 +174,38 @@ app.put("api/photobooth/:photo_name", function(req, res){
 });
 
 //calendar
-
-app.get("api/calendar", function(req, res){
-  Calendar.find({}).lean().exec().then(function(calendars){
-    res.json(calendar);
-  });
-});
-
-app.get("api/calendar/:date", function(req, res){
-  Calendar.findOne({date: req.params.date}).then(function(calendar){
-    res.render(calendar);
-    calendar.isCurrentUser = (calendar._id == req.session.calendar_id)
-    res.json(calendar);
-  });
-});
-
-app.post("api/calendar", function(req, res){
-  Calendar.create(req.body.calendar).then(function(calendar){
-    res.redirect("api/calendar/" + calendar.date);
-  });
-});
-
-app.post("api/calendar/:date/delete", function(req, res){
-  Calendar.findOneAndRemove({date: req.params.date}).then(function(){
-    res.redirect("api/calendar")
-  });
-});
-
-app.put("api/calendar/:date", function(req, res){
-  Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
-    res.json({success: true});
-  });
-});
+//
+// app.get("api/calendar", function(req, res){
+//   Calendar.find({}).lean().exec().then(function(calendars){
+//     res.json(calendar);
+//   });
+// });
+//
+// app.get("api/calendar/:date", function(req, res){
+//   Calendar.findOne({date: req.params.date}).then(function(calendar){
+//     res.render(calendar);
+//     calendar.isCurrentUser = (calendar._id == req.session.calendar_id)
+//     res.json(calendar);
+//   });
+// });
+//
+// app.post("api/calendar", function(req, res){
+//   Calendar.create(req.body.calendar).then(function(calendar){
+//     res.redirect("api/calendar/" + calendar.date);
+//   });
+// });
+//
+// app.post("api/calendar/:date/delete", function(req, res){
+//   Calendar.findOneAndRemove({date: req.params.date}).then(function(){
+//     res.redirect("api/calendar")
+//   });
+// });
+//
+// app.put("api/calendar/:date", function(req, res){
+//   Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
+//     res.json({success: true});
+//   });
+// });
 
 //contest
 

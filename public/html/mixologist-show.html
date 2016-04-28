@@ -1,7 +1,7 @@
 <h2><a data-ui-sref="MixShow"></a></h2>
 
 
-        <h1> {{mixologist.drink_name}} Recipe </h1>
+        <h1>{{mixologist.drink_name}} Recipe </h1>
         <h2>{{mixologist.ingredients}}</h2>
         <h2>{{mixologist.instructions}}</h2>
 
@@ -16,4 +16,26 @@
             <button type="submit">Edit</button>
         </form>
 
-{{/unless}}
+
+
+
+        <div data-ng-if="!MixShowVM.mixologist">
+          <h2>That drink couldn't be found!</h2>
+        </div>
+        <div data-ng-if="MixShowVM.mixologist">
+
+          <h2>{{MixShowVM.mixologist.drink_name}} </h2>
+
+          <div data-ng-if="MixShowVM.mixologist.isCurrentUser">
+            <button data-ng-click="MixShowVM.update()">Edit</button>
+            <button data-ng-click="MixShowVM.delete()">Delete</button>
+          </div>
+
+          <div data-ng-repeat="drink in MixShowVM.mixologist.drinks">
+
+          <div data-ng-if="MixShowVM.mixologist.isCurrentUser">
+            <textarea data-ng-model="MixShowVM.newDrink"></textarea>
+            <button data-ng-click="MixShowVM.addDrink()">Add a Drink</button>
+          </div>
+
+        </div>
