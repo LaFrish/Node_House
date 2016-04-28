@@ -24,9 +24,13 @@
   //   "$resource",
   //   BoomboxFactory
   // ])
-  .factory("Photobooth", [
+  // .factory("Photobooth", [
+  //   "$resource",
+  //   PhotoboothFactory
+  // ])
+  .factory("Contest", [
     "$resource",
-    PhotoboothFactory
+    ContestFactory
   ])
   // .controller("BHIndexCtrl", [
   //   "BeachhouseFactory",
@@ -57,25 +61,25 @@
   //   "$window",
   //   BoomShowCtrlFunction
   // ])
-  .controller("PhotoIndexCtrl", [
-    "PhotoboothFactory",
-    PhotoIndexCtrlFunction
-  ])
-  .controller("PhotoShowCtrl", [
-    "PhotoboothFactory",
-    "$stateParams",
-    "$window",
-    PhotoShowCtrlFunction
+  // .controller("PhotoIndexCtrl", [
+  //   "PhotoboothFactory",
+  //   PhotoIndexCtrlFunction
   // ])
-  // .controller("ContestIndexCtrl", [
-  //   "ContestFactory",
-  //   ContestIndexCtrlFunction
-  // ])
-  // .controller("ContestShowCtrl", [
-  //   "ContestFactory",
+  // .controller("PhotoShowCtrl", [
+  //   "PhotoboothFactory",
   //   "$stateParams",
   //   "$window",
-  //   ContestShowCtrlFunction
+  //   PhotoShowCtrlFunction
+  // ])
+  .controller("ContestIndexCtrl", [
+    "ContestFactory",
+    ContestIndexCtrlFunction
+  ])
+  .controller("ContestShowCtrl", [
+    "ContestFactory",
+    "$stateParams",
+    "$window",
+    ContestShowCtrlFunction
   // ])
   // .directive("ContestForm", [
   //   "ContestFactory",
@@ -137,29 +141,29 @@
     //   controller: "BoomShowCtrl",
     //   controllerAs:"BoomShowVM"
     // })
-    .state("PhotoIndex",{
-      url: "/photobooth",
-      templateUrl: "assets/html/photobooth-index.html",
-      controller: "PhotoIndexCtrl",
-      controllerAs:"PhotoIndexVM"
+    // .state("PhotoIndex",{
+    //   url: "/photobooth",
+    //   templateUrl: "assets/html/photobooth-index.html",
+    //   controller: "PhotoIndexCtrl",
+    //   controllerAs:"PhotoIndexVM"
+    // })
+    // .state("PhotoShow",{
+    //   url: "/photobooth/:photo_name",
+    //   templateUrl: "assets/html/photobooth-show.html",
+    //   controller: "PhotoShowCtrl",
+    //   controllerAs:"PhotoShowVM"
+    // })
+    .state("ContestIndex",{
+      url: "/contest",
+      templateUrl: "assets/html/contest-index.html",
+      controller: "ContestIndexCtrl",
+      controllerAs:"ContestIndexVM"
     })
-    .state("PhotoShow",{
-      url: "/photobooth/:photo_name",
-      templateUrl: "assets/html/photobooth-show.html",
-      controller: "PhotoShowCtrl",
-      controllerAs:"PhotoShowVM"
-    // })
-    // .state("ContestIndex",{
-    //   url: "/Contest",
-    //   templateUrl: "assets/html/contest-index.html",
-    //   controller: "ContestIndexCtrl",
-    //   controllerAs:"ContestIndexVM"
-    // })
-    // .state("ContestShow",{
-    //   url: "/Contest/entry",
-    //   templateUrl: "assets/html/contest-show.html",
-    //   controller: "ContestShowCtrl",
-    //   controllerAs:"ContestShowVM"
+    .state("ContestShow",{
+      url: "/contest/:entry",
+      templateUrl: "assets/html/contest-show.html",
+      controller: "ContestShowCtrl",
+      controllerAs:"ContestShowVM"
     // })
     // .state("CalendarIndex",{
     //   url: "/photobooth/:photo_name",
@@ -365,84 +369,128 @@
   //   }
   // }
 
-  function PhotoboothFactory($resource){
-    var Photobooth = $resource("/api/photobooth/:photo_name",
+  // function PhotoboothFactory($resource){
+  //   var Photobooth = $resource("/api/photobooth/:photo_name",
+  //   {}, {
+  //     update: {method: "PUT"},
+  //     like: {
+  //       method: "POST",
+  //       url:"/api/photobooth/:photo_name/like",
+  //       params: {
+  //         name: "@name"
+  //       }
+  //     }
+  //   });
+  //   Photobooth.all = Photobooth.query();
+  //   Photobooth.find = function(property, value, callback){
+  //     Photobooth.$promise.then(function(){
+  //       Photobooth.forEach(function(photobooth){
+  //         if(photobooth[property]== value) callback(photobooth);
+  //       });
+  //     });
+  //   }
+  //   return Photobooth;
+  // }
+  // function PhotoIndexCtrlFunction(Photobooth){
+  //   var vm = this;
+  //   vm.photobooths = Photobooth.all;
+  // }
+  // function PhotoShowCtrlFunction(Photobooth, $stateParams,  $window){
+  //   var vm = this;
+  //   Photobooth.find("photo_name", $stateParams.photo_name, function(photobooth){
+  //     vm.photobooth = photobooth;
+  //   });
+  //   vm.update = function(){
+  //     Photobooth.update({name: vm.photobooth.photo_name}, {photobooth: vm.photobooth}, function(){
+  //       console.log("Dizun!");
+  //     });
+  //   }
+  //   vm.delete = function(){
+  //     Photobooth.remove({ name: vm.photobooth.photo_name}, function(){
+  //     $window.location.replace("/");
+  //     });
+  //   }
+  //   vm.addPhoto = function(){
+  //     if(vm.photobooth.musics.includes(vm.newPhoto)){
+  //       console.log("This is a duplicate");
+  //     }else{
+  //       vm.photobooth.musics.push(vm.newPhoto);
+  //       vm.newPhoto = "";
+  //       vm.update();
+  //     }
+  //   }
+  //   vm.removePhoto = function($index){
+  //     vm.photobooth.musics.splice($index, 1);
+  //     vm.update();
+  //   }
+  //   vm.like = function(){
+  //     Photobooth.like(vm.photobooth, function(response){
+  //       vm.photobooth.likedBy = response.likedBy;
+  //     });
+  //   }
+  // }
+
+  function ContestFactory($resource){
+    var Contest = $resource("/api/contest/:entry",
     {}, {
       update: {method: "PUT"},
       like: {
         method: "POST",
-        url:"/api/photobooth/:photo_name/like",
+        url:"/api/contest/:entry/like",
         params: {
           name: "@name"
         }
       }
     });
-    Photobooth.all = Photobooth.query();
-    Photobooth.find = function(property, value, callback){
-      Photobooth.$promise.then(function(){
-        Photobooth.forEach(function(photobooth){
-          if(photobooth[property]== value) callback(photobooth);
+    Contest.all = Contest.query();
+    Contest.find = function(property, value, callback){
+      Contest.$promise.then(function(){
+        Contest.forEach(function(contest){
+          if(contest[property]== value) callback(contest);
         });
       });
     }
-    return Photobooth;
+    return Contest;
   }
-  function PhotoIndexCtrlFunction(Photobooth){
+  function PhotoIndexCtrlFunction(Contest){
     var vm = this;
-    vm.photobooths = Photobooth.all;
+    vm.contests = Contest.all;
   }
-  function PhotoShowCtrlFunction(Photobooth, $stateParams,  $window){
+  function PhotoShowCtrlFunction(Contest, $stateParams,  $window){
     var vm = this;
-    Photobooth.find("photo_name", $stateParams.photo_name, function(photobooth){
-      vm.photobooth = photobooth;
+    Contest.find("entry", $stateParams.entry, function(contest){
+      vm.contest = contest;
     });
     vm.update = function(){
-      Photobooth.update({name: vm.photobooth.photo_name}, {photobooth: vm.photobooth}, function(){
+      Contest.update({name: vm.contest.entry}, {contest: vm.contest}, function(){
         console.log("Dizun!");
       });
     }
     vm.delete = function(){
-      Photobooth.remove({ name: vm.photobooth.photo_name}, function(){
+      Contest.remove({ name: vm.contest.entry}, function(){
       $window.location.replace("/");
       });
     }
-    vm.addPhoto = function(){
-      if(vm.photobooth.musics.includes(vm.newPhoto)){
+    vm.addEntry = function(){
+      if(vm.contest.entries.includes(vm.newEntry)){
         console.log("This is a duplicate");
       }else{
-        vm.photobooth.musics.push(vm.newPhoto);
-        vm.newPhoto = "";
+        vm.contest.entries.push(vm.newEntry);
+        vm.newEntry = "";
         vm.update();
       }
     }
-    vm.removePhoto = function($index){
-      vm.photobooth.musics.splice($index, 1);
+    vm.removeEntry = function($index){
+      vm.contest.entries.splice($index, 1);
       vm.update();
     }
     vm.like = function(){
-      Photobooth.like(vm.photobooth, function(response){
-        vm.photobooth.likedBy = response.likedBy;
+      Contest.like(vm.contest, function(response){
+        vm.contest.likedBy = response.likedBy;
       });
     }
   }
 
-  // function ContestFactory($resource){
-  //   var Contest = $resource("/contest/entry",
-  //   {}, {
-  //     update: {method: "PUT"}
-  //   });
-  //   Contest.all = Contest.query();
-  //   return Contest;
-  // }
-  // function ContestIndexCtrlFunction(Contest){
-  //   var vm = this;
-  //   vm.contests = Contest.all;
-  // }
-  // function ContestShowCtrlFunction(Contest){
-  //   var vm = this;
-  //   vm.contests = Contest.all;
-  // };
-  //
   // function CalendarFactory($resource){
   //   var Calendar = $resource("/calendar/show",
   //   {}, {
