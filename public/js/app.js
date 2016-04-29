@@ -29,12 +29,12 @@
     ContestFactory
   ])
   .controller("MixIndexCtrl", [
-    // "Mixologist",
+    "Mixologist",
     MixIndexCtrlFunction
   ])
   .controller("MixShowCtrl", [
-    // "Mixologist",
-    // "$stateParams",
+    "Mixologist",
+    "$stateParams",
     // "$window",
     MixShowCtrlFunction
   ])
@@ -155,7 +155,7 @@
   }
 
 
-    MixologistFactory.$inject = ["$resource"];
+    // MixologistFactory.$inject = ["$resource"];
     function MixologistFactory($resource){
       var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
         update: {method: "PATCH"}
@@ -163,7 +163,7 @@
       return Mixologist;
     }
 
-    MixIndexCtrlFunction.$inject = ["Mixologist"];
+    // MixIndexCtrlFunction.$inject = ["Mixologist"];
     function MixIndexCtrlFunction(Mixologist){
       var vm = this;
       vm.mixologists = Mixologist.query();
@@ -174,7 +174,7 @@
       }
     }
 
-    MixShowCtrlFunction.$inject = ["Mixologist"];
+    // MixShowCtrlFunction.$inject = ["Mixologist"];
     function MixShowCtrlFunction($stateParams, Mixologist, $state){
 console.log(Mixologist);
       var vm        = this;
