@@ -157,7 +157,7 @@
 
     MixologistFactory.$inject = ["$resource"];
     function MixologistFactory($resource){
-      var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
+      var Mixologist = $resource("http://localhost:3001/api/mixologist/:drink_name", {}, {
         update: {method: "PATCH"}
       });
       return Mixologist;
@@ -174,13 +174,13 @@
       }
     }
 
-    MixShowCtrlFunction.$inject = ["MixologistFactory"];
-    function MixShowCtrlFunction($stateParams, MixologistFactory, $state){
-console.log(MixologistFactory);
+    MixShowCtrlFunction.$inject = ["Mixologist"];
+    function MixShowCtrlFunction($stateParams, Mixologist, $state){
+console.log(Mixologist);
       var vm        = this;
       vm.mixologist = MixologistFactory.get($stateParams);
       vm.delete     = function(){
-        MixologistFactory.remove($stateParams, function(){
+        Mixologist.remove($stateParams, function(){
           $state.go("MixIndex");
         });
       }
