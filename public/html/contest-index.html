@@ -1,11 +1,19 @@
 <style>
-label.error {
-  display: none;
+@font-face{
+	font-family:"SIFONN_BASIC";
+	src:url("SIFONN_BASIC.otf");
 }
+@font-face{
+font-family:"Sifonn";
+src:url("http://www.myfontfree.com/data/541/s/sifonnbasicouline/SIFONN_BASIC_OUTLINE.otf");
+}
+
+
 body {
   background-color: #f35464;
   height: 100vh;
   color: #333;
+  font-family: "Sifonn";
 }
 
 h1 {
@@ -68,7 +76,7 @@ button {
 }
 
 h2 {
-  color: #f35464;
+  color: #841F4B;
   font-weight: bold;
   margin-top: 0;
 }
@@ -94,98 +102,10 @@ fieldset {
   }
 }
 
-fieldset::after {
-
-    font-family: FontAwesome;
-    position: absolute;
-    right: 15px;
-    top: 17px;
-    z-index: 2;
-    width: 20px;
-    color: rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.user::after {
-  content: '\f007';
-}
-
-.email::after {
-  content: '\f0e0';
-}
-
-.password::after {
-   content: '\f023';
-}
-
-.required:valid {
-  background: radial-gradient(ellipse farthest-corner at left top, lighten(#2ecc71,20%) 30%, lighten(#2ecc71,30%) 100%);
-}
-.required:valid:focus {
-      border-color: #f35464;
-  outline: 0;
-
-          box-shadow: inset 0 1px 1px lighten(#2ecc71,20%), 0 0 8px lighten(#2ecc71,30%);
-}
-
-form {
-  text-align: center;
-}
-
-.face{
-  padding: 15px;
-  position: absolute;
-  left: 0;
-  right:0;
-  bottom: 0;
-  top: 0;
-  backface-visibility: hidden;
-  border-radius: inherit;
-}
-
-.front {
-  overflow: hidden;
-}
-
-.back {
-  transform: rotateY(-180deg);
-  background: #333;
-  .title, p, div {
-    color: #fff;
-    text-align: center;
-  }
-  .fa {
-    font-size: 10rem;
-    margin-top: 15px;
-  }
-}
-.bot-wrapper {
-  div {
-    margin: 15px;
-  }
-}
-.old {
-  display: none;
-}
-.title {
-    font-size:30px;
-}
 </style>
 
-<div class="container">
-  .front.face
     <h2> Enter to win!</h2>
-    <hr>
-    <form>
-        <input type="text" placeholder="Name" name="name" />
-      <fieldset.email
-        <input(placeholder="Email" type="email" name="email")
-      <fieldset.password
-        <input(placeholder="Password" type="password" name="password")
-      <button type="button"(role="submit")
-        .fa.fa-sign-in
-  .back.face
-</form>
+
 
 <h3 data-ng-repeat="contest in ContestIndexVM.contests">
   <a href="/contest/{{contest.name}}">{{contest.name}}</a>
@@ -199,11 +119,3 @@ form {
   <button type="button"  data-ng-click="ContestIndexVM.create()">Enter to Win</button>
 </form>
 </div>
-
-    <div class="title" All good !</div>
-    <hr>
-    <div class="bot-wrapper">
-      <p> You will soon receive a confirmation email from our team !</p>
-      <p> We look forward to working with you. Thanks for joining us !</p>
-    </div>
-        <div class="i.fa.fa-check-circle-o" />

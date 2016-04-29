@@ -26,6 +26,8 @@ height: 315px;
 
 <div data-ng-repeat="mixologist in MixShowVM.mixologist">
 <div class="gallery">
+
+
         <div data-ng-if="!MixShowVM.mixologist">
 
           <h2>That drink couldn't be found!</h2>
@@ -35,16 +37,17 @@ height: 315px;
             {{MixShowVM.mixologist.drink_name}}</br>
             {{MixShowVM.mixologist.ingredients}}</br>
             {{MixShowVM.mixologist.instructions}} </br>
+            {{MixShowVM.mixologist.photo_url}} </br>
           </h2>
 </div>
 </div>
 </div>
-          <!-- <div data-ng-if="MixShowVM.mixologist.drink_name">
+           <div data-ng-if="MixShowVM.mixologist.drink_name">
             <h2>Showing {{MixShowVM.mixologist.drink_name}}</h2>
             <input type="text" data-ng-model="MixShowVM.mixologist.drink_name" />
             <button type="button" data-ng-click="MixShowVM.update()">Update</button>
             <button type="button" data-ng-click="MixShowVM.delete()">Delete</button>
           </div>
           <div data-ng-if="!MixShowVM.mixologist.drink_name">
-            <h2>This mixologist does not exist!</h2>
-          </div>  -->
+            <h2>This drink does not exist, so make it!</h2>
+          </div>

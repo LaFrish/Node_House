@@ -35,13 +35,13 @@ height: 315px;
   <h2>There are {{MixIndexVM.mixologists.length}}</h2>
 </br>
   <!-- <div data-ng-repeat="mixologist in vm.mixologists | filter:search"> -->
-  <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.filter_on" /></br>
+  <!-- <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.filter_on" /></br> -->
 </br>
 <h3 data-ng-repeat="mixologist in MixIndexVM.mixologists">
   <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe!!</a>
 </h3>
-</br>  
-
+</br>
+<h1> Add your own NODE Vokda drink recipe</h1>
 <form>
   <input type="text" data-ng-model="MixIndexVM.newMixologist.drink_name" placeholder="Drink Name" /></br>
   <input type="string" name="MixIndexVM.newMixologist.ingredients" placeholder="Ingredients" /></br>

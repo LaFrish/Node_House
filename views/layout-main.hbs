@@ -2,22 +2,34 @@
 <html lang="en ng-app">
 <head>
     <title>Beach House</title>
-    <link rel="stylesheet/text/x-scss" href="/assets/css/styles.css.scss" />
+    <link rel="stylesheet/text/x-scss/css" href="/assets/css/styles.css.scss" />
     <base href="/" />
 </head>
 <body>
+  <!-- <nav>
+      {{#if user}}
+          <img src="{{user.t_photo_url}}" alt="{{user.name}}" /> Welcome, {{user.name}}!
+          <a href="/logout">Sign out</a>
+      {{else}}
+          <a href="/login/twitter">Sign in</a>
+      {{/if}}
+  </nav> -->
+<style>
 
+@font-face{
+font-family:"Sifonn";
+src:url("http://www.myfontfree.com/data/541/s/sifonnbasicouline/SIFONN_BASIC_OUTLINE.otf");
+}
+  body{
+    font-family: "Sifonn";
+}
+</style>
+<h1> NODE VODKA</h1>
   <div class="vertical-list">
-    <a href="/"> NODE House</a> | <a href="/mixologist">Personal Mixologist</a> | <a href="/photobooth">Photobooth</a> | <a href="/boombox">Playlist</a> | <a href="/contest">Contest</a> | <a href="/calendar">Calendar</a> <img src="/assets/css/NodeVodka-white.png">
+    <a href="/"> NODE House</a> | <a href="/mixologist">Personal Mixologist</a> | <a href="/photobooth">Photobooth</a> | <a href="/boombox">Playlist</a> | <a href="/contest">Contest</a> | <a href="/calendar">Calendar</a>
+    <!-- <img src="/assets/css/NodeVodka-white.png"> -->
   </div>
-    <nav>
-        {{#if user}}
-            <img src="{{user.t_photo_url}}" alt="{{user.name}}" /> Welcome, {{user.name}}!
-            <a href="/logout">Sign out</a>
-        {{else}}
-            <a href="/login/twitter">Sign in</a>
-        {{/if}}
-    </nav>
+<h1> NODE Ultimate Summer Beachhouse 2016 </h1>
     {{{body}}}
 </body>
 </html>

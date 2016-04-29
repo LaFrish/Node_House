@@ -49,22 +49,23 @@
   // ])
   .controller("PhotoIndexController", [
     "Photobooth",
-    PhotoIndexCtrl
+    PhotoIndexCtrlFunction
   ])
   .controller("PhotoShowController", [
     "Photobooth",
     "$stateParams",
     "$state",
-    PhotoShowCtrl
+    PhotoShowCtrlFunction
   ])
   .controller("ContestIndexController", [
     "Contest",
-    ContestIndexCtrl
+    ContestIndexCtrlFunction
   ])
   .controller("ContestShowController", [
     "Contest",
     "$stateParams",
-    ContestShowCtrl
+    "$state",
+    ContestShowCtrlFunction
   ])
   // .directive("ContestForm", [
   //   "Contest",
@@ -175,7 +176,7 @@
     }
 
     // MixShowCtrlFunction.$inject = ["Mixologist"];
-    function MixShowCtrlFunction($stateParams, Mixologist, $state){
+    function MixShowCtrlFunction(Mixologist, $stateParams, $state){
 console.log(Mixologist);
       var vm        = this;
       vm.mixologist = Mixologist.get($stateParams);
@@ -318,7 +319,7 @@ console.log(Mixologist);
   //   }
   // }
 
-  PhotoboothFactory.$inject = ["$resource"];
+  // PhotoboothFactory.$inject = ["$resource"];
  function PhotoboothFactory($resource){
    var Photobooth = $resource("/api/photobooth/:entry", {}, {
      update: {method: "PATCH"}
@@ -326,8 +327,8 @@ console.log(Mixologist);
    return Photobooth;
  }
 
-PhotoIndexCtrl.$inject = ["Photobooth"];
- function PhotoIndexCtrl(Photobooth){
+// PhotoIndexCtrl.$inject = ["Photobooth"];
+ function PhotoIndexCtrlFunction(Photobooth){
    var vm      = this;
    vm.photobooths = Photobooth.query();
    vm.create   = function(){
@@ -337,8 +338,8 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
    }
  }
 
- PhotoShowCtrl.$inject =  ["$stateParams", "Photobooth", "$state"]
- function PhotoShowCtrl($stateParams, Photobooth, $state){
+ // PhotoShowCtrl.$inject =  ["$stateParams", "Photobooth", "$state"]
+ function PhotoShowCtrlFunction(Photobooth, $stateParams, $state){
    var vm      = this;
    vm.photobooth  = Photobooth.get($stateParams);
    vm.delete   = function(){
@@ -352,8 +353,8 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
      });
    }
  }
-
-   ContestFactory.$inject = ["$resource"];
+   //
+  //  ContestFactory.$inject = ["$resource"];
   function ContestFactory($resource){
     var Contest = $resource("/api/contest/:entry", {}, {
       update: {method: "PATCH"}
@@ -361,8 +362,8 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
     return Contest;
   }
 
-  ContestIndexCtrl.$inject = ["Contest"];
-  function ContestIndexCtrl(Contest){
+  // ContestIndexCtrl.$inject = ["Contest"];
+  function ContestIndexCtrlFunction(Contest){
     var vm      = this;
     vm.contests = Contest.query();
     vm.create   = function(){
@@ -370,10 +371,15 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
         vm.contests.push(response);
       });
     }
+    vm.delete   = function(){
+      Contest.remove($stateParams, function(){
+        $state.go("ContestIndex");
+      });
+    }
   }
 
-  ContestShowCtrl.$inject =  ["$stateParams", "Contest", "$state"]
-  function ContestShowCtrl($stateParams, Contest, $state){
+  // ContestShowCtrl.$inject =  ["$stateParams", "Contest", "$state"]
+  function ContestShowCtrlFunction(Contest, $stateParams, $state){
     var vm      = this;
     vm.contest  = Contest.get($stateParams);
     vm.delete   = function(){
@@ -387,7 +393,6 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
       });
     }
   }
-
   function CalendarFactory($resource){
     var Calendar = $resource("/calendar/show",
     {}, {
@@ -396,7 +401,7 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
     Calendar.all = Calendar.query();
     return Calendar;
   }
-  function CalendarIndexCtrl(Calendar){
+  function CalendarIndexCtrlFunction(Calendar){
     var vm = this;
     vm.calendars = Calendar.all;
     vm.create   = function(){
@@ -405,7 +410,7 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
       });
     }
   }
-  function CalendarShowCtrl(Calendar){
+  function CalendarShowCtrlFunction(Calendar){
     var vm = this;
     vm.calendars = Calendar.all;
   };
