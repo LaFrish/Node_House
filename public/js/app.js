@@ -157,7 +157,7 @@
 
     MixologistFactory.$inject = ["$resource"];
     function MixologistFactory($resource){
-      var Mixologist = $resource("http://localhost:3001/api/mixologist/:drink_name", {}, {
+      var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
         update: {method: "PATCH"}
       });
       return Mixologist;
@@ -399,6 +399,11 @@ PhotoIndexCtrl.$inject = ["Photobooth"];
   function CalendarIndexCtrl(Calendar){
     var vm = this;
     vm.calendars = Calendar.all;
+    vm.create   = function(){
+      Calendar.save(vm.newCalendar, function(response){
+        vm.calendars.push(response);
+      });
+    }
   }
   function CalendarShowCtrl(Calendar){
     var vm = this;
