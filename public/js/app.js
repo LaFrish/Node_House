@@ -29,12 +29,12 @@
     ContestFactory
   ])
   .controller("MixIndexCtrl", [
-    "Mixologist",
+    // "Mixologist",
     MixIndexCtrlFunction
   ])
   .controller("MixShowCtrl", [
-    "Mixologist",
-    "$stateParams",
+    // "Mixologist",
+    // "$stateParams",
     // "$window",
     MixShowCtrlFunction
   ])
@@ -178,7 +178,7 @@
     function MixShowCtrlFunction($stateParams, Mixologist, $state){
 console.log(Mixologist);
       var vm        = this;
-      vm.mixologist = MixologistFactory.get($stateParams);
+      vm.mixologist = Mixologist.get($stateParams);
       vm.delete     = function(){
         Mixologist.remove($stateParams, function(){
           $state.go("MixIndex");
