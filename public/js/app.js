@@ -83,7 +83,7 @@
   ]);
 
 
-  RouterFunction.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
+  // RouterFunction.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
