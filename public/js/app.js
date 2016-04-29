@@ -35,7 +35,7 @@
   .controller("MixShowCtrl", [
     "Mixologist",
     "$stateParams",
-    // "$window",
+    "$state",
     MixShowCtrlFunction
   ])
   // .controller("BoomIndexController", [
