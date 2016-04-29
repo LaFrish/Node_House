@@ -28,15 +28,15 @@
     "$resource",
     ContestFactory
   ])
-  .controller("MixIndexController", [
-    "MixologistFactory",
-    MixIndexCtrl
+  .controller("MixIndexCtrl", [
+    "Mixologist",
+    MixIndexCtrlFunction
   ])
-  .controller("MixShowController", [
-    "MixologistFactory",
+  .controller("MixShowCtrl", [
+    "Mixologist",
     "$stateParams",
-    "$state",
-    MixShowCtrl
+    // "$window",
+    MixShowCtrlFunction
   ])
   // .controller("BoomIndexController", [
   //   "Boombox",
@@ -73,13 +73,13 @@
   // ])
   .controller("CalendarIndexController", [
     "Calendar",
-    CalendarIndexCtrlFunction
+    CalendarIndexCtrl
   ])
   .controller("CalendarShowController", [
     "Calendar",
     "$stateParams",
     "$state",
-    CalendarShowCtrlFunction
+    CalendarShowCtrl
   ]);
 
 
@@ -154,40 +154,43 @@
     $urlRouterProvider.otherwise("/");
   }
 
-  MixologistFactory.$inject = ["$resource"];
-  function MixologistFactory($resource){
-    var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
-      update: {method: "PATCH"}
-    });
-    return Mixologist;
-  }
 
-  MixIndexCtrl.$inject = ["Mixologist"];
-  function MixIndexCtrl(Mixologist){
-    var vm = this;
-    vm.mixologists = Mixologist.query();
-    vm.create = function(){
-      Mixologist.save(vm.newMixologist, function(response){
-        vm.mixologists.push(response);
+    MixologistFactory.$inject = ["$resource"];
+    function MixologistFactory($resource){
+      var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
+        update: {method: "PATCH"}
       });
+      return Mixologist;
     }
-  }
 
-  MixShowCtrl.$inject = ["$stateParams", "Mixologist", "$state"];
-  function MixShowCtrl($stateParams, Mixologist, $state){
-    var vm        = this;
-    vm.mixologist = mixologist.get($stateParams);
-    vm.delete     = function(){
-      Mixologist.remove($stateParams, function(){
-        $state.go("MixIndex");
-      });
+    MixIndexCtrlFunction.$inject = ["Mixologist"];
+    function MixIndexCtrlFunction(Mixologist){
+      var vm = this;
+      vm.mixologists = Mixologist.query();
+      vm.create = function(){
+        Mixologist.save(vm.newMixologist, function(response){
+          vm.mixologists.push(response);
+        });
+      }
     }
-    vm.update = function(){
-      Mixologist.update($stateParams, vm.mixologist, function(response){
-        $state.go("MixShow", response);
-      });
+
+    MixShowCtrlFunction.$inject = ["MixologistFactory"];
+    function MixShowCtrlFunction($stateParams, MixologistFactory, $state){
+console.log(MixologistFactory);
+      var vm        = this;
+      vm.mixologist = MixologistFactory.get($stateParams);
+      vm.delete     = function(){
+        MixologistFactory.remove($stateParams, function(){
+          $state.go("MixIndex");
+        });
+      }
+      vm.update = function(){
+        Mixologist.update($stateParams, vm.mixologist, function(response){
+          $state.go("MixShow", response);
+        });
+      }
     }
-  }
+
 // ------------------------------------
   // function MixologistFactory($resource){
   //   var Mixologist = $resource("/api/mixologist/:drink_name",
@@ -212,7 +215,7 @@
   //   }
   //   return Mixologist;
   // }
-  // function MixIndexCtrlFunction(Mixologist){
+  // function Function(Mixologist){
   //   var vm = this;
   //   vm.mixologists = Mixologist.all;
   //   console.log(vm.mixologists);

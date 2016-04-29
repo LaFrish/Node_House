@@ -85,6 +85,7 @@ app.get("/api/mixologist", function(req, res){
 
 app.get("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
+    console.log(mixologist);
     res.json(mixologist);
   });
 });

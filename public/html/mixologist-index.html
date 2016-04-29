@@ -15,8 +15,9 @@ background-color: #F9E77E;
 font-family: "Sifonn";
 }
 
-gallery {
-background-position: fixed;
+.MixIndex gallery {
+  border-radius: 15px;
+background-color: white;
 text-align: center;
 color:#000000;
 font-size: 50px;
@@ -32,21 +33,19 @@ height: 315px;
   <h1>Drink Up!</h1>
 <div class="gallery">
   <h2>There are {{MixIndexVM.mixologists.length}}</h2>
-  <!-- <div data-ng-repeat="mixologist in vm.mixologists | filter:search"> -->
-  <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.filter_on" />
-
-</div>
 </br>
-
+  <!-- <div data-ng-repeat="mixologist in vm.mixologists | filter:search"> -->
+  <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.filter_on" /></br>
+</br>
 <h3 data-ng-repeat="mixologist in MixIndexVM.mixologists">
   <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe!!</a>
 </h3>
-
+</br>  
 
 <form>
-  <input type="text" data-ng-model="MixIndexVM.newMixologist.drink_name" placeholder="Drink Name" />
-  <input type="string" name="MixIndexVM.newMixologist.ingredients" placeholder="Ingredients" />
-  <input type="text" name="MixIndexVM.newMixologist.instructions" placeholder="Instructions" />
+  <input type="text" data-ng-model="MixIndexVM.newMixologist.drink_name" placeholder="Drink Name" /></br>
+  <input type="string" name="MixIndexVM.newMixologist.ingredients" placeholder="Ingredients" /></br>
+  <input type="text" name="MixIndexVM.newMixologist.instructions" placeholder="Instructions" /></br>
   <button type="button" data-ng-click="MixIndexVM.create()">Create Your Drink</button>
 </form>
 </div>
