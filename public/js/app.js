@@ -12,9 +12,9 @@
     "$urlRouterProvider",
     RouterFunction
   ])
-  .factory("MixologistFactory", [
+  .factory("Mixologist", [
     "$resource",
-    MixologistFactoryFunction
+    MixologistFactory
   ])
   // .factory("Boombox", [
   //   "$resource",
@@ -29,13 +29,13 @@
   //   ContestFactory
   // ])
   .controller("MixIndexCtrl", [
-    "MixologistFactory",
+    "Mixologist",
     MixIndexCtrlFunction
   ])
   .controller("MixShowCtrl", [
-    "MixologistFactory",
+    "Mixologist",
     "$stateParams",
-    "$window",
+    // "$window",
     MixShowCtrlFunction
   ]);
   // .controller("BoomIndexCtrl", [
@@ -85,6 +85,7 @@
   // ]);
 
 
+  RouterFunction.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
@@ -155,70 +156,105 @@
     $urlRouterProvider.otherwise("/");
   }
 
-  function MixologistFactoryFunction($resource){
-    var Mixologist = $resource("/api/mixologist/:drink_name",
-    {}, {
-      update: {method: "PUT"},
-      like: {
-        method: "POST",
-        url:"/api/mixologist/:drink_name/like",
-        params: {
-          name: "@name"
-        }
-      }
+  MixologistFactory.$inject = ["$resource"];
+  function MixologistFactory($resource){
+    var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
+      update: {method: "PATCH"}
     });
-    Mixologist.all = Mixologist.query();
-    console.log(Mixologist.all);
-    Mixologist.find = function(property, value, callback){
-    Mixologist.all.$promise.then(function(){
-        Mixologist.all.forEach(function(mixologist){
-          if(mixologist[property] == value) callback(mixologist);
-        });
-      });
-    }
     return Mixologist;
   }
+
+  MixIndexCtrlFunction.$inject = ["Mixologist"];
   function MixIndexCtrlFunction(Mixologist){
     var vm = this;
-    vm.mixologists = Mixologist.all;
-    console.log(vm.mixologists);
-    // vm.mixologist = Mixologist.query();
+    vm.mixologists = Mixologist.query();
+    vm.create = function(){
+      Mixologist.save(vm.newMixologist, function(response){
+        vm.mixologists.push(response);
+      });
+    }
   }
-  function MixShowCtrlFunction(Mixologist, $stateParams,  $window){
-    var vm = this;
-    Mixologist.find("drink_name", $stateParams.drink_name, function(mixologist){
-      vm.mixologist = mixologist;
-      console.log(vm.mixologist);
-    });
+
+  MixShowCtrlFunction.$inject = ["Mixologist"];
+  function MixShowCtrlFunction($stateParams, Product, $state){
+    var vm        = this;
+    vm.mixologist = Mixologist.get($stateParams);
+    vm.delete     = function(){
+      Mixologist.remove($stateParams, function(){
+        $state.go("MixIndex");
+      });
+    }
     vm.update = function(){
-      Mixologist.update({drink_name: vm.mixologist.drink_name}, {mixologist: vm.mixologist}, function(){
-        console.log("Dizun!");
-      });
-    }
-    vm.delete = function(){
-      Mixologist.remove({ name: vm.mixologist.drink_name}, function(){
-      $window.location.replace("/");
-      });
-    }
-    vm.addDrink = function(){
-      if(vm.mixologist.drinks.includes(vm.newDrink)){
-        console.log("This is a duplicate");
-      }else{
-        vm.mixologist.drinks.push(vm.newDrink);
-        vm.newDrink = "";
-        vm.update();
-      }
-    }
-    vm.removeDrink = function($index){
-      vm.mixologist.drinks.splice($index, 1);
-      vm.update();
-    }
-    vm.like = function(){
-      Mixologist.like(vm.mixologist, function(response){
-        vm.mixologist.likedBy = response.likedBy;
+      Mixologist.update($stateParams, vm.mixologist, function(response){
+        $state.go("MixShow", response);
       });
     }
   }
+
+  // function MixologistFactoryFunction($resource){
+  //   var Mixologist = $resource("/api/mixologist/:drink_name",
+  //   {}, {
+  //     update: {method: "PUT"},
+  //     like: {
+  //       method: "POST",
+  //       url:"/api/mixologist/:drink_name/like",
+  //       params: {
+  //         name: "@name"
+  //       }
+  //     }
+  //   });
+  //   Mixologist.all = Mixologist.query();
+  //   console.log(Mixologist.all);
+  //   Mixologist.find = function(property, value, callback){
+  //   Mixologist.all.$promise.then(function(){
+  //       Mixologist.all.forEach(function(mixologist){
+  //         if(mixologist[property] == value) callback(mixologist);
+  //       });
+  //     });
+  //   }
+  //   return Mixologist;
+  // }
+  // function MixIndexCtrlFunction(Mixologist){
+  //   var vm = this;
+  //   vm.mixologists = Mixologist.all;
+  //   console.log(vm.mixologists);
+  //   // vm.mixologist = Mixologist.query();
+  // }
+  // function MixShowCtrlFunction(Mixologist, $stateParams,  $window){
+  //   var vm = this;
+  //   Mixologist.find("drink_name", $stateParams.drink_name, function(mixologist){
+  //     vm.mixologist = mixologist;
+  //     console.log(vm.mixologist);
+  //   });
+  //   vm.update = function(){
+  //     Mixologist.update({drink_name: vm.mixologist.drink_name}, {mixologist: vm.mixologist}, function(){
+  //       console.log("Dizun!");
+  //     });
+  //   }
+  //   vm.delete = function(){
+  //     Mixologist.remove({ name: vm.mixologist.drink_name}, function(){
+  //     $window.location.replace("/");
+  //     });
+  //   }
+  //   vm.addDrink = function(){
+  //     if(vm.mixologist.drinks.includes(vm.newDrink)){
+  //       console.log("This is a duplicate");
+  //     }else{
+  //       vm.mixologist.drinks.push(vm.newDrink);
+  //       vm.newDrink = "";
+  //       vm.update();
+  //     }
+  //   }
+  //   vm.removeDrink = function($index){
+  //     vm.mixologist.drinks.splice($index, 1);
+  //     vm.update();
+  //   }
+  //   vm.like = function(){
+  //     Mixologist.like(vm.mixologist, function(response){
+  //       vm.mixologist.likedBy = response.likedBy;
+  //     });
+  //   }
+  // }
   //
   // function BoomboxFactory($resource){
   //   var Boombox = $resource("/api/boombox/:playlist_name",

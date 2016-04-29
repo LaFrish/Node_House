@@ -77,7 +77,7 @@ app.get("/login/twitter/callback", function(req, res){
 
 // Mixology
 app.get("/api/mixologist", function(req, res){
-  Mixologist.find({}).lean().exec().then(function(mixologists){
+  Mixologist.find({}).then(function(mixologists){
     console.log(mixologists);
     res.json(mixologists);
   });
@@ -85,28 +85,29 @@ app.get("/api/mixologist", function(req, res){
 
 app.get("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
-    // mixologist.isCurrentUser = (mixologist._id == req.session.mixologist_id)
     res.json(mixologist);
   });
 });
 
-app.post("/api/mixologist", function(req, res){
-  Mixologist.create(req.body.mixologist).then(function(mixologists){
-    res.json("mixologists");
-  });
-});
 
-app.delete("/api/mixologist/:drink_name/delete", function(req, res){
+app.delete("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
     res.json({success: true});
   });
 });
 
-app.put("/api/mixologist/:drink_name", function(req, res){
+app.patch("/api/mixologist/:drink_name", function(req, res){
   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
     res.json("mixologist");
   });
 });
+
+app.post("/api/mixologist", function(req, res){
+  Mixologist.create(req.body.mixologist).then(function(mixologist){
+    res.json("mixologist");
+  });
+});
+
 
 //boombox
 // app.get("api/boombox", function(req, res){

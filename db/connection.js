@@ -9,7 +9,7 @@ var MixologistSchema = new mongoose.Schema(
     photo_url: String
   }
 );
-// 
+//
 // var BoomboxSchema = new mongoose.Schema(
 //   {
 //     playlist_name: String,
@@ -18,13 +18,13 @@ var MixologistSchema = new mongoose.Schema(
 //   }
 // );
 //
-// var PhotoboothSchema = new mongoose.Schema(
-//   {
-//     photo_name: String,
-//     photo_type: String
-//   }
-// );
-//
+var PhotoboothSchema = new mongoose.Schema(
+  {
+    photo_name: String,
+    photo_type: String
+  }
+);
+
 // var CalendarSchema = new mongoose.Schema(
 //   {
 //     date: Date
@@ -39,7 +39,7 @@ var MixologistSchema = new mongoose.Schema(
 
 mongoose.model("Mixologist", MixologistSchema);
 // mongoose.model("Boombox", BoomboxSchema);
-// mongoose.model("Photobooth", PhotoboothSchema);
+mongoose.model("Photobooth", PhotoboothSchema);
 // mongoose.model("Calendar", CalendarSchema);
 // mongoose.model("Contest", ContestSchema);
 

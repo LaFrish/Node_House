@@ -2,25 +2,17 @@
 <h1><a data-ui-sref="MixIndexVM">Mix Index</a></h1>
 <h1>Drink Up!</h1>
 
-
-
-
 <h3 data-ng-repeat="mixologist in MixIndexVM.mixologists">
   <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe!!</a>
 </h3>
 
-
-<div data-ng-if="showVM.mixologist">
-
-    <textarea data-ng-model="showVM.newDrink"></textarea>
-    <button data-ng-click="showVM.newDrink()">Add a drink</button>
-  </div>
+<h2>There are {{MixIndexVM.mixologists.length}}</h2>
 
 <form action="/mixologist" method="post">
     <input type="text" data-ng-model="mixologist.drink_name" placeholder="Name" />
     <input type="string" name="mixologist.ingredients" placeholder="Ingredients" />
     <input type="text" name="mixologist.instructions" placeholder="Instructions" />
-    <button type="submit">Add your recipe</button>
+    <button type="submit()">Add your recipe</button>
     <button type="button" data-ng-if="!mixologist.id" data-ng-click="create()">Create</button>
     <div data-ng-if="mixologist.id">
     <button type="button" data-ng-click="update()">Update</button>
