@@ -1,18 +1,52 @@
-<div class="MixIndex">
-<h1><a data-ui-sref="MixIndexVM">Mix Index</a></h1>
-<h1>Drink Up!</h1>
+<style>
+@font-face{
+	font-family:"SIFONN_BASIC";
+	src:url("SIFONN_BASIC.otf");
+}
+@font-face{
+font-family:"Sifonn";
+src:url("http://www.myfontfree.com/data/541/s/sifonnbasicouline/SIFONN_BASIC_OUTLINE.otf");
+}
 
-<h2>There are {{MixIndexVM.mixologists.length}}</h2>
+
+
+body {
+background-color: #F9E77E;
+font-family: "Sifonn";
+}
+
+gallery {
+background-position: fixed;
+text-align: center;
+color:#000000;
+font-size: 50px;
+font-family: 'SIFONN_BASIC', cursive;
+padding: 100px 30px 15px 30px;
+margin: auto;
+width:800px;
+height: 315px;
+}
+</style>
+<div class="MixIndex">
+
+  <h1>Drink Up!</h1>
+<div class="gallery">
+  <h2>There are {{MixIndexVM.mixologists.length}}</h2>
+  <!-- <div data-ng-repeat="mixologist in vm.mixologists | filter:search"> -->
+  <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.filter_on" />
+
+</div>
+</br>
 
 <h3 data-ng-repeat="mixologist in MixIndexVM.mixologists">
   <a href="/mixologist/{{mixologist.drink_name}}">{{mixologist.drink_name}} Recipe!!</a>
 </h3>
 
 
-    <form>
-    <input type="text" data-ng-model="MixIndexVM.newMixologist.drink_name" placeholder="Name" />
-    <input type="string" name="MixIndexVM.newMixologist.ingredients" placeholder="Ingredients" />
-    <input type="text" name="MixIndexVM.newMixologist.instructions" placeholder="Instructions" />
-
-    <button type="button" data-ng-if="!mixologist.id" data-ng-click="MixIndexVM.create()">Create Your Drink</button>
+<form>
+  <input type="text" data-ng-model="MixIndexVM.newMixologist.drink_name" placeholder="Drink Name" />
+  <input type="string" name="MixIndexVM.newMixologist.ingredients" placeholder="Ingredients" />
+  <input type="text" name="MixIndexVM.newMixologist.instructions" placeholder="Instructions" />
+  <button type="button" data-ng-click="MixIndexVM.create()">Create Your Drink</button>
 </form>
+</div>

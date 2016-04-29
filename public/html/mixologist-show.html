@@ -1,30 +1,41 @@
-<h2><a data-ui-sref="MixShow"></a></h2>
+<style>
+gallery {
+background: url("Varios_06_2.png");
+background-position: fixed;
+text-align: center;
+color:#000000;
+font-size: 50px;
+font-family: 'SIFONN_BASIC', cursive;
+padding: 100px 30px 15px 30px;
+margin: auto;
+width:800px;
+height: 315px;
+}
+</style>
+<div class="MixShow"
+<h2><a data-ui-sref="MixShowVM">Mix show</a></h2>
 
-        <form method="post" action="delete">
-            <button type="submit">Delete</button>
-        </form>
-
-
+<div data-ng-repeat="mixologist in MixShowVM.mixologist">
+<div class="gallery">
         <div data-ng-if="!MixShowVM.mixologist">
 
           <h2>That drink couldn't be found!</h2>
         </div>
-        <div data-ng-if="MixShowVM.mixologist">
-
-          <h2>{{MixShowVM.mixologist.drink_name}}
-          {{MixShowVM.mixologist.ingredients}}
-        {{MixShowVM.mixologist.instructions}} </h2>
-
-          <div data-ng-if="MixShowVM.mixologist">
-            <button data-ng-click="MixShowVM.update()">Edit</button>
-            <button data-ng-click="MixShowVM.delete()">Delete</button>
+        <div data-ng-model="MixShowVM.mixologist">
+          <h2>
+            {{MixShowVM.mixologist.drink_name}}</br>
+            {{MixShowVM.mixologist.ingredients}}</br>
+            {{MixShowVM.mixologist.instructions}} </br>
+          </h2>
+</div>
+</div>
+</div>
+          <!-- <div data-ng-if="MixShowVM.mixologist.drink_name">
+            <h2>Showing {{MixShowVM.mixologist.drink_name}}</h2>
+            <input type="text" data-ng-model="MixShowVM.mixologist.drink_name" />
+            <button type="button" data-ng-click="MixShowVM.update()">Update</button>
+            <button type="button" data-ng-click="MixShowVM.delete()">Delete</button>
           </div>
-
-          <div data-ng-repeat="drink in MixShowVM.mixologist.drinks">
-
-          <div data-ng-if="mixologist">
-            <textarea data-ng-model="newDrink"></textarea>
-            <button data-ng-click="addDrink()">Add a Drink</button>
-          </div>
-
-        </div>
+          <div data-ng-if="!MixShowVM.mixologist.drink_name">
+            <h2>This mixologist does not exist!</h2>
+          </div>  -->

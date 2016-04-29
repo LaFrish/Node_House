@@ -17,7 +17,7 @@ var MixologistSchema = new mongoose.Schema(
 //     photo_url: String
 //   }
 // );
-//
+
 var PhotoboothSchema = new mongoose.Schema(
   {
     photo_name: String,
@@ -25,22 +25,24 @@ var PhotoboothSchema = new mongoose.Schema(
   }
 );
 
-// var CalendarSchema = new mongoose.Schema(
-//   {
-//     date: Date
-//   }
-// );
-//
-// var ContestSchema = new mongoose.Schema(
-//   {
-//     entry: String
-//   }
-// );
+var CalendarSchema = new mongoose.Schema(
+  {
+    month: String
+  }
+);
+
+var ContestSchema = new mongoose.Schema(
+  {
+   name: String,
+   address: [String],
+   email: String,
+  }
+);
 
 mongoose.model("Mixologist", MixologistSchema);
 // mongoose.model("Boombox", BoomboxSchema);
 mongoose.model("Photobooth", PhotoboothSchema);
-// mongoose.model("Calendar", CalendarSchema);
-// mongoose.model("Contest", ContestSchema);
+mongoose.model("Calendar", CalendarSchema);
+mongoose.model("Contest", ContestSchema);
 
 module.exports = mongoose;

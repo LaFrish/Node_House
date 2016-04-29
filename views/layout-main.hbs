@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en ng-app">
 <head>
     <title>Beach House</title>
     <link rel="stylesheet/text/x-scss" href="/assets/css/styles.css.scss" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-resource.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-    <script src="/assets/js/app.js"></script>
     <base href="/" />
 </head>
 <body>
@@ -21,10 +17,6 @@
             <a href="/login/twitter">Sign in</a>
         {{/if}}
     </nav>
-    <div data-ng-app="beachhouse">
-      <main data-ui-view></main>
-    </div>
-    <h1>layout main</h1>
     {{{body}}}
 </body>
 </html>

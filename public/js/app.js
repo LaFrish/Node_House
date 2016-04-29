@@ -20,69 +20,67 @@
   //   "$resource",
   //   BoomboxFactory
   // ])
-  // .factory("Photobooth", [
-  //   "$resource",
-  //   PhotoboothFactory
-  // ])
-  // .factory("Contest", [
-  //   "$resource",
-  //   ContestFactory
-  // ])
-  .controller("MixIndexCtrl", [
-    "Mixologist",
-    MixIndexCtrlFunction
+  .factory("Photobooth", [
+    "$resource",
+    PhotoboothFactory
   ])
-  .controller("MixShowCtrl", [
-    "Mixologist",
+  .factory("Contest", [
+    "$resource",
+    ContestFactory
+  ])
+  .controller("MixIndexController", [
+    "MixologistFactory",
+    MixIndexCtrl
+  ])
+  .controller("MixShowController", [
+    "MixologistFactory",
     "$stateParams",
-    // "$window",
-    MixShowCtrlFunction
-  ]);
-  // .controller("BoomIndexCtrl", [
-  //   "BoomboxFactory",
-  //   BoomIndexCtrlFunction
+    "$state",
+    MixShowCtrl
+  ])
+  // .controller("BoomIndexController", [
+  //   "Boombox",
+  //   BoomIndexCtrl
   // ])
-  // .controller("BoomShowCtrl", [
-  //   "BoomboxFactory",
+  // .controller("BoomShowController", [
+  //   "Boombox",
   //   "$stateParams",
-  //   "$window",
-  //   BoomShowCtrlFunction
+  //   BoomShowCtrl
   // ])
-  // .controller("PhotoIndexCtrl", [
-  //   "PhotoboothFactory",
-  //   PhotoIndexCtrlFunction
-  // ])
-  // .controller("PhotoShowCtrl", [
-  //   "PhotoboothFactory",
-  //   "$stateParams",
-  //   "$window",
-  //   PhotoShowCtrlFunction
-  // ])
-  // .controller("ContestIndexCtrl", [
-  //   "ContestFactory",
-  //   ContestIndexCtrlFunction
-  // ])
-  // .controller("ContestShowCtrl", [
-  //   "ContestFactory",
-  //   "$stateParams",
-  //   "$window",
-  //   ContestShowCtrlFunction
-  // ]);
+  .controller("PhotoIndexController", [
+    "Photobooth",
+    PhotoIndexCtrl
+  ])
+  .controller("PhotoShowController", [
+    "Photobooth",
+    "$stateParams",
+    "$state",
+    PhotoShowCtrl
+  ])
+  .controller("ContestIndexController", [
+    "Contest",
+    ContestIndexCtrl
+  ])
+  .controller("ContestShowController", [
+    "Contest",
+    "$stateParams",
+    ContestShowCtrl
+  ])
   // .directive("ContestForm", [
-  //   "ContestFactory",
+  //   "Contest",
   //   "$state",
   //   ContestFormDirectiveFunction
   // ])
-  // .controller("CalendarIndexCtrl", [
-  //   "CalendarFactory",
-  //   CalendarIndexCtrlFunction
-  // ])
-  // .controller("CalendarShowCtrl", [
-  //   "CalendarFactory",
-  //   "$stateParams",
-  //   "$window",
-  //   CalendarShowCtrlFunction
-  // ]);
+  .controller("CalendarIndexController", [
+    "Calendar",
+    CalendarIndexCtrlFunction
+  ])
+  .controller("CalendarShowController", [
+    "Calendar",
+    "$stateParams",
+    "$state",
+    CalendarShowCtrlFunction
+  ]);
 
 
   RouterFunction.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
@@ -104,7 +102,7 @@
       templateUrl: "assets/html/mixologist-show.html",
       controller: "MixShowCtrl",
       controllerAs: "MixShowVM"
-    });
+    })
     // .state("BoomIndex",{
     //   url: "/boombox",
     //   templateUrl: "assets/html/boombox-index.html",
@@ -117,42 +115,42 @@
     //   controller: "BoomShowCtrl",
     //   controllerAs:"BoomShowVM"
     // })
-    // .state("PhotoIndex",{
-    //   url: "/photobooth",
-    //   templateUrl: "assets/html/photobooth-index.html",
-    //   controller: "PhotoIndexCtrl",
-    //   controllerAs:"PhotoIndexVM"
-    // })
-    // .state("PhotoShow",{
-    //   url: "/photobooth/:photo_name",
-    //   templateUrl: "assets/html/photobooth-show.html",
-    //   controller: "PhotoShowCtrl",
-    //   controllerAs:"PhotoShowVM"
-    // })
-    // .state("ContestIndex",{
-    //   url: "/contest",
-    //   templateUrl: "assets/html/contest-index.html",
-    //   controller: "ContestIndexCtrl",
-    //   controllerAs:"ContestIndexVM"
-    // })
-    // .state("ContestShow",{
-    //   url: "/contest/:entry",
-    //   templateUrl: "assets/html/contest-show.html",
-    //   controller: "ContestShowCtrl",
-    //   controllerAs:"ContestShowVM"
-    // });
-    // .state("CalendarIndex",{
-    //   url: "/photobooth/:photo_name",
-    //   templateUrl: "assets/html/photobooth-show.html",
-    //   controller: "PhotoShowCtrl",
-    //   controllerAs:"PhotoShowVM"
-    // })
-    // .state("CalendarShow",{
-    //   url: "/photobooth/:photo_name",
-    //   templateUrl: "assets/html/photobooth-show.html",
-    //   controller: "PhotoShowCtrl",
-    //   controllerAs:"PhotoShowVM"
-    // });
+    .state("PhotoIndex",{
+      url: "/photobooth",
+      templateUrl: "assets/html/photobooth-index.html",
+      controller: "PhotoIndexCtrl",
+      controllerAs:"PhotoIndexVM"
+    })
+    .state("PhotoShow",{
+      url: "/photobooth/:photo_name",
+      templateUrl: "assets/html/photobooth-show.html",
+      controller: "PhotoShowCtrl",
+      controllerAs:"PhotoShowVM"
+    })
+    .state("ContestIndex",{
+      url: "/contest",
+      templateUrl: "assets/html/contest-index.html",
+      controller: "ContestIndexCtrl",
+      controllerAs:"ContestIndexVM"
+    })
+    .state("ContestShow",{
+      url: "/contest/:entry",
+      templateUrl: "assets/html/contest-show.html",
+      controller: "ContestShowCtrl",
+      controllerAs:"ContestShowVM"
+    })
+    .state("CalendarIndex",{
+      url: "/calendar/",
+      templateUrl: "assets/html/calendar-index.html",
+      controller: "CalIndexCtrl",
+      controllerAs:"CalIndexVM"
+    })
+    .state("CalendarShow",{
+      url: "/calendar/:show",
+      templateUrl: "assets/html/calendar-show.html",
+      controller: "CalShowCtrl",
+      controllerAs:"CalShowVM"
+    });
     $urlRouterProvider.otherwise("/");
   }
 
@@ -164,8 +162,8 @@
     return Mixologist;
   }
 
-  MixIndexCtrlFunction.$inject = ["Mixologist"];
-  function MixIndexCtrlFunction(Mixologist){
+  MixIndexCtrl.$inject = ["Mixologist"];
+  function MixIndexCtrl(Mixologist){
     var vm = this;
     vm.mixologists = Mixologist.query();
     vm.create = function(){
@@ -175,10 +173,10 @@
     }
   }
 
-  MixShowCtrlFunction.$inject = ["Mixologist"];
-  function MixShowCtrlFunction($stateParams, Product, $state){
+  MixShowCtrl.$inject = ["$stateParams", "Mixologist", "$state"];
+  function MixShowCtrl($stateParams, Mixologist, $state){
     var vm        = this;
-    vm.mixologist = Mixologist.get($stateParams);
+    vm.mixologist = mixologist.get($stateParams);
     vm.delete     = function(){
       Mixologist.remove($stateParams, function(){
         $state.go("MixIndex");
@@ -190,8 +188,8 @@
       });
     }
   }
-
-  // function MixologistFactoryFunction($resource){
+// ------------------------------------
+  // function MixologistFactory($resource){
   //   var Mixologist = $resource("/api/mixologist/:drink_name",
   //   {}, {
   //     update: {method: "PUT"},
@@ -220,7 +218,7 @@
   //   console.log(vm.mixologists);
   //   // vm.mixologist = Mixologist.query();
   // }
-  // function MixShowCtrlFunction(Mixologist, $stateParams,  $window){
+  // function MixShowCtrlFunction(Mixologist, $stateParams,  $state){
   //   var vm = this;
   //   Mixologist.find("drink_name", $stateParams.drink_name, function(mixologist){
   //     vm.mixologist = mixologist;
@@ -233,7 +231,7 @@
   //   }
   //   vm.delete = function(){
   //     Mixologist.remove({ name: vm.mixologist.drink_name}, function(){
-  //     $window.location.replace("/");
+  //     $state.location.replace("/");
   //     });
   //   }
   //   vm.addDrink = function(){
@@ -282,7 +280,7 @@
   //   var vm = this;
   //   vm.boomboxes = Boombox.all;
   // }
-  // function BoomShowCtrlFunction(Boombox, $stateParams,  $window){
+  // function BoomShowCtrlFunction(Boombox, $stateParams,  $state){
   //   var vm = this;
   //   Boombox.find("playlist_name", $stateParams.playlist_name, function(boombox){
   //     vm.boombox = boombox;
@@ -294,7 +292,7 @@
   //   }
   //   vm.delete = function(){
   //     Boombox.remove({ name: vm.boombox.playlist_name}, function(){
-  //     $window.location.replace("/");
+  //     $state.location.replace("/");
   //     });
   //   }
   //   vm.addMusic = function(){
@@ -316,149 +314,91 @@
   //     });
   //   }
   // }
-  //
-  // function PhotoboothFactory($resource){
-  //   var Photobooth = $resource("/api/photobooth/:photo_name",
-  //   {}, {
-  //     update: {method: "PUT"},
-  //     like: {
-  //       method: "POST",
-  //       url:"/api/photobooth/:photo_name/like",
-  //       params: {
-  //         name: "@name"
-  //       }
-  //     }
-  //   });
-  //   Photobooth.all = Photobooth.query();
-  //   Photobooth.find = function(property, value, callback){
-  //     Photobooth.$promise.then(function(){
-  //       Photobooth.forEach(function(photobooth){
-  //         if(photobooth[property]== value) callback(photobooth);
-  //       });
-  //     });
-  //   }
-  //   return Photobooth;
-  // }
-  // function PhotoIndexCtrlFunction(Photobooth){
-  //   var vm = this;
-  //   vm.photobooths = Photobooth.all;
-  // }
-  // function PhotoShowCtrlFunction(Photobooth, $stateParams,  $window){
-  //   var vm = this;
-  //   Photobooth.find("photo_name", $stateParams.photo_name, function(photobooth){
-  //     vm.photobooth = photobooth;
-  //   });
-  //   vm.update = function(){
-  //     Photobooth.update({name: vm.photobooth.photo_name}, {photobooth: vm.photobooth}, function(){
-  //       console.log("Dizun!");
-  //     });
-  //   }
-  //   vm.delete = function(){
-  //     Photobooth.remove({ name: vm.photobooth.photo_name}, function(){
-  //     $window.location.replace("/");
-  //     });
-  //   }
-  //   vm.addPhoto = function(){
-  //     if(vm.photobooth.musics.includes(vm.newPhoto)){
-  //       console.log("This is a duplicate");
-  //     }else{
-  //       vm.photobooth.musics.push(vm.newPhoto);
-  //       vm.newPhoto = "";
-  //       vm.update();
-  //     }
-  //   }
-  //   vm.removePhoto = function($index){
-  //     vm.photobooth.musics.splice($index, 1);
-  //     vm.update();
-  //   }
-  //   vm.like = function(){
-  //     Photobooth.like(vm.photobooth, function(response){
-  //       vm.photobooth.likedBy = response.likedBy;
-  //     });
-  //   }
-  // }
-  //
-  // function ContestFactory($resource){
-  //   var Contest = $resource("/api/contest/:entry",
-  //   {}, {
-  //     update: {method: "PUT"},
-  //     like: {
-  //       method: "POST",
-  //       url:"/api/contest/:entry/like",
-  //       params: {
-  //         name: "@name"
-  //       }
-  //     }
-  //   });
-  //   Contest.all = Contest.query();
-  //   Contest.find = function(property, value, callback){
-  //     Contest.$promise.then(function(){
-  //       Contest.forEach(function(contest){
-  //         if(contest[property]== value) callback(contest);
-  //       });
-  //     });
-  //   }
-  //   return Contest;
-  // }
-  // function ContestIndexCtrlFunction(Contest){
-  //   var vm = this;
-  //   vm.contests = Contest.all;
-  // }
-  // function ContestShowCtrlFunction(Contest, $stateParams,  $window){
-  //   var vm = this;
-  //   Contest.find("entry", $stateParams.entry, function(contest){
-  //     vm.contest = contest;
-  //   });
-  //   vm.update = function(){
-  //     Contest.update({name: vm.contest.entry}, {contest: vm.contest}, function(){
-  //       console.log("Dizun!");
-  //     });
-  //   }
-  //   vm.delete = function(){
-  //     Contest.remove({ name: vm.contest.entry}, function(){
-  //     $window.location.replace("/");
-  //     });
-  //   }
-  //   vm.addEntry = function(){
-  //     if(vm.contest.entries.includes(vm.newEntry)){
-  //       console.log("This is a duplicate");
-  //     }else{
-  //       vm.contest.entries.push(vm.newEntry);
-  //       vm.newEntry = "";
-  //       vm.update();
-  //     }
-  //   }
-  //   vm.removeEntry = function($index){
-  //     vm.contest.entries.splice($index, 1);
-  //     vm.update();
-  //   }
-  //   vm.like = function(){
-  //     Contest.like(vm.contest, function(response){
-  //       vm.contest.likedBy = response.likedBy;
-  //     });
-  //   }
-  // }
-})();
-  // function CalendarFactory($resource){
-  //   var Calendar = $resource("/calendar/show",
-  //   {}, {
-  //     update: {method: "PUT"}
-  //   });
-  //   Calendar.all = Calendar.query();
-  //   return Calendar;
-  // }
-  // function CalendarIndexCtrlFunction(Calendar){
-  //   var vm = this;
-  //   vm.calendars = Calendar.all;
-  // }
-  // function CalendarShowCtrlFunction(Calendar){
-  //   var vm = this;
-  //   vm.calendars = Contest.all;
-  // };
-  // function ContestFormDirectiveFunction(ContestFactory, $state){
-  //   return{
-  //     templateUrl: "assets/html/contest-form.html",
-  //     scope: {
-  //       grumble: "="
-  //     }
-  //   };
+
+  PhotoboothFactory.$inject = ["$resource"];
+ function PhotoboothFactory($resource){
+   var Photobooth = $resource("/api/photobooth/:entry", {}, {
+     update: {method: "PATCH"}
+   });
+   return Photobooth;
+ }
+
+PhotoIndexCtrl.$inject = ["Photobooth"];
+ function PhotoIndexCtrl(Photobooth){
+   var vm      = this;
+   vm.photobooths = Photobooth.query();
+   vm.create   = function(){
+     Photobooth.save(vm.newPhotobooth, function(response){
+       vm.photobooths.push(response);
+     });
+   }
+ }
+
+ PhotoShowCtrl.$inject =  ["$stateParams", "Photobooth", "$state"]
+ function PhotoShowCtrl($stateParams, Photobooth, $state){
+   var vm      = this;
+   vm.photobooth  = Photobooth.get($stateParams);
+   vm.delete   = function(){
+     Photobooth.remove($stateParams, function(){
+       $state.go("PhotoIndex");
+     });
+   }
+   vm.update = function(){
+     Photobooth.update($stateParams, vm.photobooth, function(response){
+       $state.go("PhotoShow", response);
+     });
+   }
+ }
+
+   ContestFactory.$inject = ["$resource"];
+  function ContestFactory($resource){
+    var Contest = $resource("/api/contest/:entry", {}, {
+      update: {method: "PATCH"}
+    });
+    return Contest;
+  }
+
+  ContestIndexCtrl.$inject = ["Contest"];
+  function ContestIndexCtrl(Contest){
+    var vm      = this;
+    vm.contests = Contest.query();
+    vm.create   = function(){
+      Contest.save(vm.newContest, function(response){
+        vm.contests.push(response);
+      });
+    }
+  }
+
+  ContestShowCtrl.$inject =  ["$stateParams", "Contest", "$state"]
+  function ContestShowCtrl($stateParams, Contest, $state){
+    var vm      = this;
+    vm.contest  = Contest.get($stateParams);
+    vm.delete   = function(){
+      Contest.remove($stateParams, function(){
+        $state.go("ContestIndex");
+      });
+    }
+    vm.update = function(){
+      Contest.update($stateParams, vm.contest, function(response){
+        $state.go("ContestShow", response);
+      });
+    }
+  }
+
+  function CalendarFactory($resource){
+    var Calendar = $resource("/calendar/show",
+    {}, {
+      update: {method: "PUT"}
+    });
+    Calendar.all = Calendar.query();
+    return Calendar;
+  }
+  function CalendarIndexCtrl(Calendar){
+    var vm = this;
+    vm.calendars = Calendar.all;
+  }
+  function CalendarShowCtrl(Calendar){
+    var vm = this;
+    vm.calendars = Calendar.all;
+  };
+  })();

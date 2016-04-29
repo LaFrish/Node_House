@@ -1,15 +1,209 @@
-<h2><a data-ui-sref="BoomShow">Contest index page</a></h2>
+<style>
+label.error {
+  display: none;
+}
+body {
+  background-color: #f35464;
+  height: 100vh;
+  color: #333;
+}
 
+h1 {
+  font-size: 3rem;
+  color: #fff;
+  margin: 15px;
+    span {
+    display: block;
+    font-size: 2.5rem;
+  }
+}
 
+.container {
+  opacity: 0;
+  box-sizing: border-box;
+  position: absolute;
+  padding-bottom: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+  width: 150px;
+  height: 70px;
+  border-radius: 15px;
+}
+
+.button {
+      background: radial-gradient(ellipse farthest-corner at left top, #f35464 30%, #841F4B 100%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 500ms ease;
+  font-size:2rem;
+  &:hover {
+    box-shadow: 0 7px 30px #f35464;
+    transition: box-shadow 500ms ease;
+  }
+}
+
+button {
+    cursor:pointer;
+}
+#controller {
+    z-index:2;
+    position:absolute;
+  right: 0;
+  top: 0;
+    display:inline-block;
+    padding:20px;
+    background-color:rgba(0, 0, 0, 0.4);
+  display:none;
+}
+
+#slider{
+    margin-top:20px;
+}
+
+h2 {
+  color: #f35464;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+fieldset {
+  margin: 10px 0;
+  position: relative;
+  input {
+    width: 100%;
+    height: 52px;
+    color: #333333;
+    padding: 15px 40px 15px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+    &:focus {
+      border-color: #f35464;
+  outline: 0;
+          box-shadow: inset 0 1px 1px #f35464, 0 0 8px #f35464;
+    }
+  }
+}
+
+fieldset::after {
+
+    font-family: FontAwesome;
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    z-index: 2;
+    width: 20px;
+    color: rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.user::after {
+  content: '\f007';
+}
+
+.email::after {
+  content: '\f0e0';
+}
+
+.password::after {
+   content: '\f023';
+}
+
+.required:valid {
+  background: radial-gradient(ellipse farthest-corner at left top, lighten(#2ecc71,20%) 30%, lighten(#2ecc71,30%) 100%);
+}
+.required:valid:focus {
+      border-color: #f35464;
+  outline: 0;
+
+          box-shadow: inset 0 1px 1px lighten(#2ecc71,20%), 0 0 8px lighten(#2ecc71,30%);
+}
+
+form {
+  text-align: center;
+}
+
+.face{
+  padding: 15px;
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom: 0;
+  top: 0;
+  backface-visibility: hidden;
+  border-radius: inherit;
+}
+
+.front {
+  overflow: hidden;
+}
+
+.back {
+  transform: rotateY(-180deg);
+  background: #333;
+  .title, p, div {
+    color: #fff;
+    text-align: center;
+  }
+  .fa {
+    font-size: 10rem;
+    margin-top: 15px;
+  }
+}
+.bot-wrapper {
+  div {
+    margin: 15px;
+  }
+}
+.old {
+  display: none;
+}
+.title {
+    font-size:30px;
+}
+</style>
+
+<div class="container">
+  .front.face
+    <h2> Enter to win!</h2>
+    <hr>
+    <form>
+        <input type="text" placeholder="Name" name="name" />
+      <fieldset.email
+        <input(placeholder="Email" type="email" name="email")
+      <fieldset.password
+        <input(placeholder="Password" type="password" name="password")
+      <button type="button"(role="submit")
+        .fa.fa-sign-in
+  .back.face
+</form>
+
+<h3 data-ng-repeat="contest in ContestIndexVM.contests">
+  <a href="/contest/{{contest.name}}">{{contest.name}}</a>
+</h3>
 
 <form>
-  <input placeholder="Title" data-ng-model="grumble.title" />
-  <input placeholder="Author name" data-ng-model="grumble.authorName" />
-  <input placeholder="Photo URL" data-ng-model="grumble.photoUrl" />
-  <textarea placeholder="Grumble content" data-ng-model="grumble.content"></textarea>
-  <button type="button" data-ng-if="!grumble.id" data-ng-click="create()">Create</button>
-  <div data-ng-if="grumble.id">
-    <button type="button" data-ng-click="update()">Update</button>
-    <button type="button" data-ng-click="delete()">Delete</button>
-  </div>
+  <div class="fieldset">
+  <input type="text" data-ng-model="ContestIndexVM.newContestologist.name" placeholder="Name" />
+  <input type="string" name="ContestIndexVM.newContestologist.address" placeholder="Address" />
+  <input type="text" name="ContestIndexVM.newContestologist.email" placeholder="Email" />
+  <button type="button"  data-ng-click="ContestIndexVM.create()">Enter to Win</button>
 </form>
+</div>
+
+    <div class="title" All good !</div>
+    <hr>
+    <div class="bot-wrapper">
+      <p> You will soon receive a confirmation email from our team !</p>
+      <p> We look forward to working with you. Thanks for joining us !</p>
+    </div>
+        <div class="i.fa.fa-check-circle-o" />
