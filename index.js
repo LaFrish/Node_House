@@ -7,7 +7,6 @@ var qstring = require("qs");
 var cmongo = require("connect-mongo");
 var mongoose= require("./db/connection");
 var twitter = require("./lib/twitter_auth");
-var sass = require("node-sass");
 var jquery = require("jquery");
 var jsdom = require("jsdom");
 
