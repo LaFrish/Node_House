@@ -1,10 +1,19 @@
 {
   "name": "beachhouse",
-  "version": "1.0.0",
-  "description": "Beach House",
   "main": "index.js",
+  "version": "1.0.0",
+  "description": "Node Vodka Beach House",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.0.0",
+    "npm":"3.8.6"
+  }
+}
   "scripts": {
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+  "heroku-postbuild": "echo This runs afterwards.",
     "postinstall": "bower install && grunt build",
+    "test": "mocha",
     "start": "nf start"
   },
   "repository": {
