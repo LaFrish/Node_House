@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/nodehouse");
+mongoose.connect("mongodb://heroku_0rmqjwc9:k50hblm5koar4cihvecgh4sthr@ds023105.mlab.com:23105/heroku_0rmqjwc9");
 
 var MixologistSchema = new mongoose.Schema(
   {
