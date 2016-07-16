@@ -232,7 +232,7 @@ app.delete("/api/contest/:entry", function(req, res){
 });
 
 app.post("/api/contest/:entry", function(req, res){
-  Contest.findOneAndUpentry({entry: req.params.entry}, req.body.contest, {new: true}).then(function(contest){
+  Contest.findOneAndUpdate({entry: req.params.entry}, req.body.contest, {new: true}).then(function(contest){
     res.json(contest);
   });
 });

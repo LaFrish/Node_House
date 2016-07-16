@@ -104,6 +104,7 @@ fieldset {
 
 </style>
 
+<div class="ContestIndex">
     <h1> Enter to win the ultimate beachweek @ NODE's Summer Beachhouse!</h1>
 
 
@@ -113,9 +114,10 @@ fieldset {
 
 <form>
   <div class="fieldset">
-  <input type="text" data-ng-model="ContestIndexVM.newContestologist.name" placeholder="Name" />
-  <input type="string" name="ContestIndexVM.newContestologist.address" placeholder="Address" />
-  <input type="text" name="ContestIndexVM.newContestologist.email" placeholder="Email" />
+  <input type="text" data-ng-model="ContestIndexVM.newContest.name" placeholder="Name" />
+  <input type="string" name="ContestIndexVM.newContest.address" placeholder="Address" />
+  <input type="text" name="ContestIndexVM.newContest.email" placeholder="Email" />
   <button type="button"  data-ng-click="ContestIndexVM.create()">Enter to Win</button>
 </form>
+</div>
 </div>

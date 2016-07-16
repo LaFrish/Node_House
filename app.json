@@ -1,0 +1,6 @@
+{
+  "name": "beachhouse",
+  "description": "Node Vodka Beach House",
+  "repository": "https://github.com/LaFrish/beachhouse.git",
+  "keywords": ["node", "express", "static"]
+}

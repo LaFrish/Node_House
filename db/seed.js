@@ -1,5 +1,5 @@
 var mongoose = require("./connection");
-var seedData = require("./seeds");
+var seedData = require("./seeds"), (".contests");
 
 var Mixologist = mongoose.model("Mixologist");
 // var Boombox = mongoose.model("Boombox");
