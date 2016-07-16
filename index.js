@@ -238,7 +238,7 @@ app.post("/api/contest/:entry", function(req, res){
 });
 
 app.get("/*", function(req, res){
-  res.render("beachhouse");
+  res.render("Node_House");
 });
 
 app.listen(app.get("port"), function(){

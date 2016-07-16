@@ -2,7 +2,7 @@
 
 (function(){
   angular
-  .module("beachhouse", [
+  .module("Node_House", [
     "ui.router",
     "ngResource"
   ])
