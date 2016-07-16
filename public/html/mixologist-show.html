@@ -21,6 +21,14 @@ width:800px;
 height: 315px;
 }
 </style>
+
+
+<form action="/contacts/{{contact.name}}" method="post">
+
+
+
+
+
 <div class="MixShow"
 <h2><a data-ui-sref="MixShowVM">Mix show</a></h2>
 
@@ -45,9 +53,12 @@ height: 315px;
            <div data-ng-if="MixShowVM.mixologist.drink_name">
             <h2>Showing {{MixShowVM.mixologist.drink_name}}</h2>
             <input type="text" data-ng-model="MixShowVM.mixologist.drink_name" />
+            <form>
             <button type="button" data-ng-click="MixShowVM.update()">Update</button>
             <button type="button" data-ng-click="MixShowVM.delete()">Delete</button>
           </div>
+        </form>
           <div data-ng-if="!MixShowVM.mixologist.drink_name">
             <h2>This drink does not exist, so make it!</h2>
           </div>
+</div>

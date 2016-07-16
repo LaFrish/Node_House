@@ -78,7 +78,7 @@ app.get("/login/twitter/callback", function(req, res){
 app.get("/api/mixologist", function(req, res){
   Mixologist.find({}).then(function(mixologists){
     console.log(mixologists);
-    res.json(mixologists);
+    res.json("mixologists");
   });
 });
 
@@ -86,7 +86,7 @@ app.get("/api/mixologist/:drink_name", function(req, res){
   console.log(req);
   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
     console.log(mixologist);
-    res.json(mixologist);
+    res.json("mixologist");
   });
 });
 
@@ -150,7 +150,7 @@ app.get("/api/photobooth", function(req, res){
 });
 
 app.get("/api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOne({photo_name: req.params.photo_name}).then(function(photobooth){
+  Photobooth.findOne({photo_id: req.params.photo_id}).then(function(photobooth){
     res.json(photobooth);
   });
 });
@@ -162,13 +162,13 @@ app.post("/api/photobooth", function(req, res){
 });
 
 app.delete("/api/photobooth/:photo_name/delete", function(req, res){
-  Photobooth.findOneAndRemove({photo_name: req.params.photo_name}).then(function(){
+  Photobooth.findOneAndRemove({photo_id: req.params.photo_id}).then(function(){
     res.json({success: true});
   });
 });
 
 app.put("/api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOneAndUpdate({photo_name: req.params.photo_name}, req.body.photobooth, {new: true}).then(function(photobooth){
+  Photobooth.findOneAndUpdate({photo_id: req.params.photo_id}, req.body.photobooth, {new: true}).then(function(photobooth){
     res.json(photobooth);
   });
 });

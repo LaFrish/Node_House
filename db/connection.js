@@ -1,12 +1,12 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://heroku_0rmqjwc9:k50hblm5koar4cihvecgh4sthr@ds023105.mlab.com:23105/heroku_0rmqjwc9");
 
+
 var MixologistSchema = new mongoose.Schema(
   {
     drink_name: String,
     ingredients: [String],
-    instructions: String,
-    photo_url: String
+    instructions: String
   }
 );
 //
@@ -20,8 +20,7 @@ var MixologistSchema = new mongoose.Schema(
 
 var PhotoboothSchema = new mongoose.Schema(
   {
-    photo_name: String,
-    photo_type: String
+    photo_id: Number
   }
 );
 
@@ -34,8 +33,11 @@ var CalendarSchema = new mongoose.Schema(
 var ContestSchema = new mongoose.Schema(
   {
    name: String,
-   address: [String],
-   email: String,
+   street_address: String,
+   city: String,
+   state: String,
+   zip_code: Number,
+   email: String
   }
 );
 

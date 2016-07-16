@@ -112,11 +112,15 @@ fieldset {
   <a href="/contest/{{contest.name}}">{{contest.name}}</a>
 </h3>
 
-<form>
+
+<form action="/contests" method="post">
   <div class="fieldset">
   <input type="text" data-ng-model="ContestIndexVM.newContest.name" placeholder="Name" />
-  <input type="string" name="ContestIndexVM.newContest.address" placeholder="Address" />
-  <input type="text" name="ContestIndexVM.newContest.email" placeholder="Email" />
+  <input type="text" name="ContestIndexVM.newContest.street_address" placeholder="Street Address" />
+	<input type="text" name="ContestIndexVM.newContest.city" placeholder="City" />
+	<input type="text" name="ContestIndexVM.newContest.state" placeholder="State" />
+	<input type="number" name="ContestIndexVM.newContest.zip_code" placeholder="Zip Code" />
+  <input type="text" name="ContestIndexVM.newContest.email" placeholder="Email Address" />
   <button type="button"  data-ng-click="ContestIndexVM.create()">Enter to Win</button>
 </form>
 </div>

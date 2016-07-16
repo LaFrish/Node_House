@@ -1,4 +1,5 @@
-[{
+[
+  {
     "drink_name": "Moscow Mule",
     "ingredients": [
         "Vodka",
@@ -7,7 +8,8 @@
     ],
     "instructions": "Mix all together",
     "photo_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t35.0-12/855943_10151827526838902_1531205493_o.jpg?oh=a11a6541cd2b0ea9ab5fba3551785e82&oe=57258F31"
-}, {
+},
+{
     "drink_name": "Holy Water",
     "ingredients": [
         "Vodka",
@@ -15,4 +17,5 @@
     ],
     "instructions": "Mix all together",
     "photo_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t35.0-12/855943_10151827526838902_1531205493_o.jpg?oh=a11a6541cd2b0ea9ab5fba3551785e82&oe=57258F31"
-}]
+}
+]
