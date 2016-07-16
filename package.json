@@ -2,7 +2,7 @@
   "name": "beachhouse",
   "description": "Node Vodka Beach House",
   "engines": {
-    "node": "6.0.0"
+    "node": "6.0.0",
   },
   "main": "index.js",
   "scripts": {
