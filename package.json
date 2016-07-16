@@ -3,14 +3,15 @@
   "description": "Node Vodka Beach House",
   "engines": {
     "node": "6.0.0",
+    "npm": "3.8.6"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nf start"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LaFrish/Node_House.git"
+    "url": "https://github.com/LaFrish/Node_House"
   },
   "author": "Farishta Haider",
   "license": "ISC",
