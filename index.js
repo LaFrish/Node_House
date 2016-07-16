@@ -14,10 +14,10 @@ var app     = express();
 var SMongo = cmongo(session);
 
 
-var Mixologist = mongoose.model("Mixologist");
+// var Mixologist = mongoose.model("Mixologist");
 // var Boombox = mongoose.model("Boombox");
-var Photobooth = mongoose.model("Photobooth");
-var Calendar = mongoose.model("Calendar");
+// var Photobooth = mongoose.model("Photobooth");
+// var Calendar = mongoose.model("Calendar");
 var Contest = mongoose.model("Contest");
 
 
@@ -75,40 +75,40 @@ app.get("/login/twitter/callback", function(req, res){
 // });
 
 // Mixology
-app.get("/api/mixologist", function(req, res){
-  Mixologist.find({}).then(function(mixologists){
-    console.log(mixologists);
-    res.json("mixologists");
-  });
-});
-
-app.get("/api/mixologist/:drink_name", function(req, res){
-  console.log(req);
-  Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
-    console.log(mixologist);
-    res.json("mixologist");
-  });
-});
-
-
-app.delete("/api/mixologist/:drink_name", function(req, res){
-  Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
-    res.json({success: true});
-  });
-});
-
-app.patch("/api/mixologist/:drink_name", function(req, res){
-  Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
-    res.json("mixologist");
-  });
-});
-
-app.post("/api/mixologist", function(req, res){
-  Mixologist.create(req.body.mixologist).then(function(mixologist){
-    res.json("mixologist");
-  });
-});
-
+// app.get("/api/mixologist", function(req, res){
+//   Mixologist.find({}).then(function(mixologists){
+//     console.log(mixologists);
+//     res.json("mixologists");
+//   });
+// });
+//
+// app.get("/api/mixologist/:drink_name", function(req, res){
+//   console.log(req);
+//   Mixologist.findOne({drink_name: req.params.drink_name}).then(function(mixologist){
+//     console.log(mixologist);
+//     res.json("mixologist");
+//   });
+// });
+//
+//
+// app.delete("/api/mixologist/:drink_name", function(req, res){
+//   Mixologist.findOneAndRemove({drink_name: req.params.drink_name}).then(function(){
+//     res.json({success: true});
+//   });
+// });
+//
+// app.patch("/api/mixologist/:drink_name", function(req, res){
+//   Mixologist.findOneAndUpdate({drink_name: req.params.drink_name}, req.body.mixologist, {new: true}).then(function(mixologist){
+//     res.json("mixologist");
+//   });
+// });
+//
+// app.post("/api/mixologist", function(req, res){
+//   Mixologist.create(req.body.mixologist).then(function(mixologist){
+//     res.json("mixologist");
+//   });
+// });
+//
 
 //boombox
 // app.get("/api/boombox", function(req, res){
@@ -143,67 +143,67 @@ app.post("/api/mixologist", function(req, res){
 
 // //photobooth
 
-app.get("/api/photobooth", function(req, res){
-  Photobooth.find({}).then(function(photobooths){
-    res.json("photobooths");
-  });
-});
-
-app.get("/api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOne({photo_id: req.params.photo_id}).then(function(photobooth){
-    res.json(photobooth);
-  });
-});
-
-app.post("/api/photobooth", function(req, res){
-  Photobooth.create(req.body.photobooth).then(function(photobooth){
-    res.json(photobooth);
-  });
-});
-
-app.delete("/api/photobooth/:photo_name/delete", function(req, res){
-  Photobooth.findOneAndRemove({photo_id: req.params.photo_id}).then(function(){
-    res.json({success: true});
-  });
-});
-
-app.put("/api/photobooth/:photo_name", function(req, res){
-  Photobooth.findOneAndUpdate({photo_id: req.params.photo_id}, req.body.photobooth, {new: true}).then(function(photobooth){
-    res.json(photobooth);
-  });
-});
-
-//calendar
-
-app.get("/api/calendar", function(req, res){
-  Calendar.find({}).then(function(calendars){
-    res.json(calendars);
-  });
-});
-
-app.get("/api/calendar/:date", function(req, res){
-  Calendar.findOne({date: req.params.date}).then(function(calendar){
-    res.json(calendar);
-  });
-});
-
-app.post("/api/calendar", function(req, res){
-  Calendar.create(req.body.calendar).then(function(calendar){
-    res.json(calendar);
-  });
-});
-
-app.post("/api/calendar/:date", function(req, res){
-  Calendar.findOneAndRemove({date: req.params.date}).then(function(){
-    res.json(calendar);
-  });
-});
-
-app.put("/api/calendar/:date", function(req, res){
-  Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
-    res.json({success: true});
-  });
-});
+// app.get("/api/photobooth", function(req, res){
+//   Photobooth.find({}).then(function(photobooths){
+//     res.json("photobooths");
+//   });
+// });
+//
+// app.get("/api/photobooth/:photo_name", function(req, res){
+//   Photobooth.findOne({photo_id: req.params.photo_id}).then(function(photobooth){
+//     res.json(photobooth);
+//   });
+// });
+//
+// app.post("/api/photobooth", function(req, res){
+//   Photobooth.create(req.body.photobooth).then(function(photobooth){
+//     res.json(photobooth);
+//   });
+// });
+//
+// app.delete("/api/photobooth/:photo_name/delete", function(req, res){
+//   Photobooth.findOneAndRemove({photo_id: req.params.photo_id}).then(function(){
+//     res.json({success: true});
+//   });
+// });
+//
+// app.put("/api/photobooth/:photo_name", function(req, res){
+//   Photobooth.findOneAndUpdate({photo_id: req.params.photo_id}, req.body.photobooth, {new: true}).then(function(photobooth){
+//     res.json(photobooth);
+//   });
+// });
+//
+// //calendar
+//
+// app.get("/api/calendar", function(req, res){
+//   Calendar.find({}).then(function(calendars){
+//     res.json(calendars);
+//   });
+// });
+//
+// app.get("/api/calendar/:date", function(req, res){
+//   Calendar.findOne({date: req.params.date}).then(function(calendar){
+//     res.json(calendar);
+//   });
+// });
+//
+// app.post("/api/calendar", function(req, res){
+//   Calendar.create(req.body.calendar).then(function(calendar){
+//     res.json(calendar);
+//   });
+// });
+//
+// app.post("/api/calendar/:date", function(req, res){
+//   Calendar.findOneAndRemove({date: req.params.date}).then(function(){
+//     res.json(calendar);
+//   });
+// });
+//
+// app.put("/api/calendar/:date", function(req, res){
+//   Calendar.findOneAndUpdate({date: req.params.date}, req.body.calendar, {new: true}).then(function(calendar){
+//     res.json({success: true});
+//   });
+// });
 
 //contest
 

@@ -84,7 +84,6 @@
   ]);
 
 
-  // RouterFunction.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
   function RouterFunction($stateProvider, $locationProvider, $urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
@@ -155,8 +154,6 @@
     $urlRouterProvider.otherwise("/");
   }
 
-
-    // MixologistFactory.$inject = ["$resource"];
     function MixologistFactory($resource){
       var Mixologist = $resource("/api/mixologist/:drink_name", {}, {
         update: {method: "PATCH"}
@@ -164,7 +161,6 @@
       return Mixologist;
     }
 
-    // MixIndexCtrlFunction.$inject = ["Mixologist"];
     function MixIndexCtrlFunction(Mixologist){
       var vm = this;
       vm.mixologists = Mixologist.query();
@@ -175,7 +171,6 @@
       }
     }
 
-    // MixShowCtrlFunction.$inject = ["Mixologist"];
     function MixShowCtrlFunction(Mixologist, $stateParams, $state){
 console.log(Mixologist);
       var vm        = this;
@@ -319,7 +314,6 @@ console.log(Mixologist);
   //   }
   // }
 
-  // PhotoboothFactory.$inject = ["$resource"];
  function PhotoboothFactory($resource){
    var Photobooth = $resource("/api/photobooth/:entry", {}, {
      update: {method: "PATCH"}
@@ -327,7 +321,6 @@ console.log(Mixologist);
    return Photobooth;
  }
 
-// PhotoIndexCtrl.$inject = ["Photobooth"];
  function PhotoIndexCtrlFunction(Photobooth){
    var vm      = this;
    vm.photobooths = Photobooth.query();
@@ -338,7 +331,6 @@ console.log(Mixologist);
    }
  }
 
- // PhotoShowCtrl.$inject =  ["$stateParams", "Photobooth", "$state"]
  function PhotoShowCtrlFunction(Photobooth, $stateParams, $state){
    var vm      = this;
    vm.photobooth  = Photobooth.get($stateParams);
@@ -353,8 +345,7 @@ console.log(Mixologist);
      });
    }
  }
-   //
-  //  ContestFactory.$inject = ["$resource"];
+
   function ContestFactory($resource){
     var Contest = $resource("/api/contest/:entry", {}, {
       update: {method: "PATCH"}
@@ -362,7 +353,7 @@ console.log(Mixologist);
     return Contest;
   }
 
-  // ContestIndexCtrl.$inject = ["Contest"];
+
   function ContestIndexCtrlFunction(Contest){
     var vm      = this;
     vm.contests = Contest.query();
@@ -371,15 +362,10 @@ console.log(Mixologist);
         vm.contests.push(response);
       });
     }
-    vm.delete   = function(){
-      Contest.remove($stateParams, function(){
-        $state.go("ContestIndex");
-      });
-    }
   }
 
-  // ContestShowCtrl.$inject =  ["$stateParams", "Contest", "$state"]
   function ContestShowCtrlFunction(Contest, $stateParams, $state){
+    console.log(Contest);
     var vm      = this;
     vm.contest  = Contest.get($stateParams);
     vm.delete   = function(){
