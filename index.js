@@ -38,7 +38,7 @@ var Contest = mongoose.model("Contest");
 //   })
 // }));
 
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3000);
 app.set("view engine", "hbs");
 app.engine(".hbs", hbs({
   extname:        ".hbs",
