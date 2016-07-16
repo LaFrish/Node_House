@@ -1,6 +1,6 @@
 {
-  "name": "beachhouse",
+  "name": "Node House",
   "description": "Node Vodka Beach House",
-  "repository": "https://github.com/LaFrish/beachhouse.git",
+  "repository": "https://github.com/LaFrish/Node_House.git",
   "keywords": ["node", "express", "static"]
 }

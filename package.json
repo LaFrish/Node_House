@@ -1,5 +1,5 @@
 {
-  "name": "beachhouse",
+  "name": "Node House",
   "description": "Node Vodka Beach House",
   "engines": {
     "node": "6.0.0",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LaFrish/beachhouse.git"
+    "url": "https://github.com/LaFrish/Node_House.git"
   },
   "author": "Farishta Haider",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LaFrish/beachhouse/issues"
+    "url": "https://github.com/LaFrish/Node_House/issues"
   },
-  "homepage": "https://github.com/LaFrish/beachhouse#readme",
+  "homepage": "https://github.com/LaFrish/Node_House#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
     "connect-mongo": "^1.1.0",

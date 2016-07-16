@@ -1,12 +1,12 @@
 {
-  "name": "beachhouse",
+  "name": "Node House",
   "description": "",
   "main": "index.js",
   "authors": [
     "LaFrish <farishta.haider@gmail.com>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/LaFrish/beachhouse",
+  "homepage": "https://github.com/LaFrish/Node_House",
   "ignore": [
     "**/.*",
     "node_modules",
