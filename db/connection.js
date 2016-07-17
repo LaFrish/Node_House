@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-// mongoose.connect("mongodb://heroku_0rmqjwc9:k50hblm5koar4cihvecgh4sthr@ds023105.mlab.com:23105/heroku_0rmqjwc9");
 
 
 var MixologistSchema = new mongoose.Schema(
@@ -9,24 +8,9 @@ var MixologistSchema = new mongoose.Schema(
     instructions: String
   }
 );
-//
-// var BoomboxSchema = new mongoose.Schema(
-//   {
-//     playlist_name: String,
-//     playlist_url: String,
-//     photo_url: String
-//   }
-// );
-
 var PhotoboothSchema = new mongoose.Schema(
   {
     photo_id: Number
-  }
-);
-
-var CalendarSchema = new mongoose.Schema(
-  {
-    month: String
   }
 );
 
@@ -41,15 +25,13 @@ var ContestSchema = new mongoose.Schema(
   }
 );
 mongoose.model("Mixologist", MixologistSchema);
-// mongoose.model("Boombox", BoomboxSchema);
 mongoose.model("Photobooth", PhotoboothSchema);
-mongoose.model("Calendar", CalendarSchema);
 mongoose.model("Contest", ContestSchema);
 
 if(process.env.NODE_ENV == "production"){
   mongoose.connect(process.env.MONGOLAB_URI);
 }else{
-  mongoose.connect("mongodb://localhost/Node_House");
+  mongoose.connect("mongodb://heroku_0rmqjwc9:k50hblm5koar4cihvecgh4sthr@ds023105.mlab.com:23105/heroku_0rmqjwc9");
 }
 
 
